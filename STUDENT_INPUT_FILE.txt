@@ -1,0 +1,35 @@
+Undergrad
+Alice
+Anderson
+aanderson@uw.edu
+4.00
+Junior
+BSIT
+GradStudent
+Bob
+Bradshaw
+bbradshaw@uw.edu
+3.50
+11111.11
+Dr. Donald Chinn
+Undergrad
+Carlos
+Castenada
+ccastenada@uw.edu
+2.50
+Sophomore
+Psychology
+GradStudent
+David
+Davis
+ddavis@uw.edu
+1.50
+222222.22
+Dr. Ankur Teredesai
+Undergrad
+Celina
+Schlecht
+cgscgs@uw.edu
+3.90
+Junior
+BSIT
