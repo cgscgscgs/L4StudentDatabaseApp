@@ -105,7 +105,7 @@ namespace StudentDbApp
         
         
         
-        //displays database options to user
+        //
         private void RunDatabase()
         {
             while (true)
@@ -186,7 +186,7 @@ namespace StudentDbApp
         }//supersecretbackdoor
 
 
-        //this method checks whether email is available, and if yes, adds to database
+        // ADD, this method checks whether email is available, and if yes, adds to database
         private void AddNewStudentRecord()
         {
             //
@@ -251,63 +251,76 @@ namespace StudentDbApp
             }
 
         }
-            //this method checks if student record exists already, using email key
-            private Student FindStudentRecord(out string email)
-            {
-                Console.WriteLine("\nEnter the email address(primary key) to search for: ");
-                email = Console.ReadLine();
 
-                //iterate through students, looks for email
-                foreach (Student stu in students)
+        // DELETE, this method checks if a student exists, and deletes it if it does
+        private void DeleteStudentRecord() 
+        {
+            Console.WriteLine("Please enter the KEY (full university email address) of the student you wish to DELETE: ");
+            //read string from user
+            Console.Readline
+            //search for key
+            //if found, delete
+            
+            //if not found, try again? exit?
+        }
+        // FIND, this method checks if student record exists already, using email key
+        private Student FindStudentRecord(out string email)
+        {
+            Console.WriteLine("\nEnter the email address(primary key) to search for: ");
+            email = Console.ReadLine();
+
+            //iterate through students, looks for email
+            foreach (Student stu in students)
+            {
+                if (email == stu.EmailAddress)
                 {
-                    if (email == stu.EmailAddress)
-                    {
-                        Console.WriteLine($"\nFOUND email address: {stu.EmailAddress}\n");
-                        return stu;
-                    }
+                    Console.WriteLine($"\nFOUND email address: {stu.EmailAddress}\n");
+                    return stu;
                 }
-
-                //when at this point, did not find email, print this
-                Console.WriteLine($"{email} NOT FOUND.");
-                return null;
             }
 
+            //when at this point, did not find email, print this
+            Console.WriteLine($"{email} NOT FOUND.");
+            return null;
+        }
 
-            private void PrintAllRecordPrimaryKeys()
+        // KEYS, this method prints all email addresses to console
+        private void PrintAllRecordPrimaryKeys()
+        {
+            Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
+            //for each loop to iterate through student objects and print their data
+            foreach (Student stu in students)
             {
-                Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
-                //for each loop to iterate through student objects and print their data
-                foreach (Student stu in students)
-                {
-                    Console.WriteLine(stu.EmailAddress);
-                }
-                Console.WriteLine("++++++++++Done Listing All Student Emails++++++++++++");
+                Console.WriteLine(stu.EmailAddress);
             }
+            Console.WriteLine("++++++++++Done Listing All Student Emails++++++++++++");
+        }
+        
+        // PRINT RECORDS, this method prints all stored information about students to console window
+        private void PrintAllRecords()
+        {
 
-            private void PrintAllRecords()
+            Console.WriteLine("\n\n++++++++++Listing All Student Records++++++++++++");
+            //for each loop to iterate through student objects and print their data
+            foreach (Student stu in students)
             {
-
-                Console.WriteLine("\n\n++++++++++Listing All Student Records++++++++++++");
-                //for each loop to iterate through student objects and print their data
-                foreach (Student stu in students)
-                {
-                    Console.WriteLine(stu);
-                }
-                Console.WriteLine("\n++++++++++Done Listing All Student Records++++++++++++");
+                Console.WriteLine(stu);
             }
+            Console.WriteLine("\n++++++++++Done Listing All Student Records++++++++++++");
+        }
 
 
-            //get input as char from key press without having user press enter
-            private char GetUserInputChar()
-            {
-                ConsoleKeyInfo key = Console.ReadKey();
-                return key.KeyChar;
-            }
+        //get input as char from key press without having user press enter
+        private char GetUserInputChar()
+        {
+            ConsoleKeyInfo key = Console.ReadKey();
+            return key.KeyChar;
+        }
 
 
-            private void DisplayMainMenu()
-            {
-                Console.Write(@"
+        private void DisplayMainMenu()
+        {
+            Console.Write(@"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -322,13 +335,13 @@ Print [K]eys only (email address)
 [E]xit without saving changes
 
 Choose selection: ");
-            }
+        }
 
-        //constants for reading and writing student data to files
+        //constants for reading and writing data to and from same file
         private const string StudentOutputFile = "STUDENT_INPUT_FILE.txt";
         private const string StudentInputFile = "STUDENT_INPUT_FILE.txt";
 
-
+        // SAVE, this method writes all data to the output file
         public void WriteDataToOutputFile() 
         {
         
