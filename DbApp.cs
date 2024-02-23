@@ -131,6 +131,10 @@ namespace StudentDbApp
                     case 'k':
                         PrintAllRecordPrimaryKeys();
                         break;
+                        case 'M':
+                        case 'm':
+                            ModifyStudent();
+                            break;
                     case 'P':
                     case 'p':
                         PrintAllRecords();
@@ -372,6 +376,314 @@ namespace StudentDbApp
             ConsoleKeyInfo key = Console.ReadKey();
             return key.KeyChar;
         }
+        
+        //used by modify class to find record using contain method
+        //Will look for full email or part of email like NET IT atmcon - atmcdon@uw.edu
+        private Student FindStudentRecord1()
+        {
+
+            Console.WriteLine("\nEnter the beginning of Email address ( NET ID ) to search for: ");
+            string email = Console.ReadLine();
+
+            /*Console.WriteLine(students.Exists(y => y.EmailAddress == email));*/
+            
+            Console.WriteLine(students.Find(x => x.EmailAddress.Contains(email)));
+
+            Student stu = students.Find(x => x.EmailAddress.Contains(email));
+            return stu;
+
+        }
+        // Modify a student through a series of prompts 
+        private void ModifyStudent()
+        {
+            bool exit = false;
+            while (exit == false)
+            {
+                Student stu = null;
+                //finds student by email or beginning of email (NETID)
+                
+                
+                while (true)
+                {
+                    stu = FindStudentRecord1();
+                    if (stu == null)
+                    {
+                        Console.WriteLine("Student is Not found\n");
+                    }
+                    else if (stu !=  null)
+                    {
+                        Console.WriteLine("Is this the student your looking for? ");
+                        Console.WriteLine(@"
+[Y]es
+[N]o 
+[E]xit
+
+");
+                        char select1 = GetUserInputChar();
+                        if (select1 == 'y' || select1 == 'Y')
+                        {
+                            break;
+                        }
+                        if (select1 == 'e' || select1 == 'E')
+                        {
+                            exit = true;
+                            break;
+                        }
+                    }
+                    
+
+                }
+                if (exit)
+                { break; }
+                //print student
+                Console.WriteLine("\nDo you want to continue modifying this student?");
+                /*Console.WriteLine(stu.ToString());*/
+                Console.WriteLine("[Y]es or [N]o: ");
+
+                char selection = GetUserInputChar();
+
+                if (selection == 'y' || selection == 'Y')
+                {
+                    //Gets type of student 
+                    if (stu is Undergrad)
+                    {
+
+                        Undergrad undergrad = (Undergrad)stu; // Cast stu to UnderGrad
+
+
+                        // will revert back to the origianl name if user does not confirm.
+                        string FNRevertBack = undergrad.FirstName;
+                        string LNRevertBack = undergrad.LastName;
+                        string EMRevertBack = undergrad.EmailAddress;
+                        double GPARevertBack = undergrad.GradePtAvg;
+                        YearRank YRRevertBack = undergrad.Rank;
+                        string DMRevertBack = undergrad.DegreeMajor;
+
+
+
+
+                        Console.WriteLine($@"
+What part of the student account would
+you like to modify?
+[F]irst Name      {undergrad.FirstName}
+[L]ast Name       {undergrad.LastName}
+[E]mail address   {undergrad.EmailAddress} 
+[G]pa             {undergrad.GradePtAvg}
+[Y]ear in school  {undergrad.Rank}
+[M]ajor           {undergrad.DegreeMajor}
+[D]one
+            ");
+                        char selectMod = GetUserInputChar();
+
+                        switch (selectMod)
+                        {
+                            case 'F':
+                            case 'f':
+                                Console.WriteLine("Please enter new first name: ");
+                                undergrad.FirstName = Console.ReadLine();
+                                break;
+                            case 'L':
+                            case 'l':
+                                Console.WriteLine("Please enter new Last name: ");
+                                undergrad.LastName = Console.ReadLine();
+                                break;
+                            case 'E':
+                            case 'e':
+                                Console.WriteLine("Please enter new Email: ");
+                                undergrad.EmailAddress = Console.ReadLine();
+                                break;
+                            case 'G':
+                            case 'g':
+                                Console.WriteLine("Please enter new GPA: ");
+                                undergrad.GradePtAvg = double.Parse(Console.ReadLine());
+                                break;
+                            case 'Y':
+                            case 'y':
+                                Console.WriteLine("[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
+                                Console.WriteLine("Enter the year in school for this student:");
+                                undergrad.Rank = (YearRank)int.Parse(Console.ReadLine());
+                                break;
+                            case 'M':
+                            case 'm':
+                                Console.WriteLine("Please enter new Major: ");
+                                undergrad.DegreeMajor = Console.ReadLine();
+                                break;
+                            case 'D':
+                            case 'd':
+
+                                break;
+
+                        }
+                        Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
+
+                        Console.WriteLine($"/n{undergrad}");
+                        Console.WriteLine("Are you sure you want to make this change?");
+                        Console.WriteLine("Confirm [Y]es or [N]o: ");
+                        //are you sure you want to make this change?
+                        //yes or no
+                        char confirmChange = GetUserInputChar();
+                        if (confirmChange == 'y' || confirmChange == 'Y')
+                        {
+                            Console.WriteLine("Your change has been made.");
+                        }
+
+                        //no will revert back to the original
+                        if (confirmChange == 'n' || confirmChange == 'N')
+                        {
+                            Console.WriteLine("No change has been made.");
+                            switch (selectMod)
+                            {
+                                case 'F':
+                                case 'f':
+                                    undergrad.FirstName = FNRevertBack;
+
+                                    break;
+                                case 'L':
+                                case 'l':
+                                    undergrad.LastName = LNRevertBack;
+                                    break;
+                                case 'E':
+                                case 'e':
+                                    undergrad.EmailAddress = EMRevertBack;
+                                    break;
+                                case 'G':
+                                case 'g':
+                                    undergrad.GradePtAvg = GPARevertBack;
+                                    break;
+                                case 'Y':
+                                case 'y':
+                                    undergrad.Rank = YRRevertBack;
+                                    break;
+                                case 'M':
+                                case 'm':
+                                    undergrad.DegreeMajor = DMRevertBack;
+
+                                    break;
+                            }
+                            Console.WriteLine($"{undergrad}");
+                        }
+                    }
+
+                        
+
+                    if (stu is GradStudent)
+                    {
+                        GradStudent gradStu = (GradStudent)stu; // Cast stu to GradStudent
+
+                        // will revert back to the origianl name if user does not confirm.
+                        string FNRevertBack = gradStu.FirstName;
+                        string LNRevertBack = gradStu.LastName;
+                        string EMRevertBack = gradStu.EmailAddress;
+                        double GPARevertBack = gradStu.GradePtAvg;
+                        decimal TCRevertBack = gradStu.TuitionCredit;
+                        string AVRevertBack = gradStu.FaculityAdvisor;
+                        Console.WriteLine($@"
+What part of the student account would
+you like to modify?
+[F]irst Name      {gradStu.FirstName}
+[L]ast Name       {gradStu.LastName}
+[E]mail address   {gradStu.EmailAddress} 
+[G]pa             {gradStu.GradePtAvg}
+[T]uition Credit  {gradStu.TuitionCredit}
+[A]dvisor         {gradStu.FaculityAdvisor}  
+        ");
+                        char selectMod = GetUserInputChar();
+
+                        switch (selectMod)
+                        {
+                            case 'F':
+                            case 'f':
+                                Console.WriteLine("Please enter new first name: ");
+                                gradStu.FirstName = Console.ReadLine();
+                                break;
+                            case 'L':
+                            case 'l':
+                                Console.WriteLine("Please enter new Last name: ");
+                                gradStu.LastName = Console.ReadLine();
+                                break;
+                            case 'E':
+                            case 'e':
+                                Console.WriteLine("Please enter new Email: ");
+                                gradStu.EmailAddress = Console.ReadLine();
+                                break;
+                            case 'G':
+                            case 'g':
+                                Console.WriteLine("Please enter new GPA: ");
+                                gradStu.GradePtAvg = double.Parse(Console.ReadLine());
+                                break;
+                            case 'Y':
+                            case 'y':
+                                Console.WriteLine("Please enter new Tuition Credit");
+                                gradStu.TuitionCredit = decimal.Parse(Console.ReadLine());
+                                break;
+                            case 'T':
+                            case 't':
+                                Console.WriteLine("Please enter new Facilty Advisor: ");
+                                gradStu.FaculityAdvisor = Console.ReadLine();
+                                break;
+                            case 'A':
+                            case 'a':
+
+                                break;
+
+                        }
+                        Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
+
+                        Console.WriteLine($"/n{gradStu}");
+                        Console.WriteLine("Are you sure you want to make this change?");
+                        Console.WriteLine("Confirm [Y]es or [N]o: ");
+                        //are you sure you want to make this change?
+                        //yes or no
+                        char confirmChange = GetUserInputChar();
+                        if (confirmChange == 'y' || confirmChange == 'Y')
+                        {
+                            Console.WriteLine("Your change has been made.");
+                        }
+
+                        //no will revert back to the original
+                        if (confirmChange == 'n' || confirmChange == 'N')
+                        {
+                            Console.WriteLine("No change has been made.");
+                            switch (selectMod)
+                            {
+                                case 'F':
+                                case 'f':
+                                    gradStu.FirstName = FNRevertBack;
+
+                                    break;
+                                case 'L':
+                                case 'l':
+                                    gradStu.LastName = LNRevertBack;
+                                    break;
+                                case 'E':
+                                case 'e':
+                                    gradStu.EmailAddress = EMRevertBack;
+                                    break;
+                                case 'G':
+                                case 'g':
+                                    gradStu.GradePtAvg = GPARevertBack;
+                                    break;
+                                case 'T':
+                                case 't':
+                                    gradStu.TuitionCredit = TCRevertBack;
+                                    break;
+                                case 'A':
+                                case 'a':
+                                    gradStu.FaculityAdvisor = AVRevertBack;
+
+                                    break;
+                            }
+                        }
+                        //print new version if stu with reverted or updated
+                        Console.WriteLine($"{gradStu}");
+                    }
+   
+                }
+                //exits modify
+                exit = true;
+            }
+        }
+
 
 
         private void DisplayMainMenu()
