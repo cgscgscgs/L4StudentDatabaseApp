@@ -185,6 +185,62 @@ namespace StudentDbApp
             }//while
         }//supersecretbackdoor
 
+        
+        // DeleteStudentRecord selects and confirms the removal of one student record 
+         private void DeleteStudentRecord()
+         {
+             Boolean process = true;
+             String email = string.Empty;
+             Student stu = FindStudentRecord(out email);
+             // if no student is found, then the method does not run through the additional if else statements 
+             // and returns to the main menu 
+             if (stu == null)
+             {
+                 process = false;
+                 Console.WriteLine("No existing record to delete. Returning to main menu");
+             }
+             // if a student record is found, then the rest of the code in the method executes 
+            else
+            {
+             // confirm that the chosen student record is correct 
+             Console.WriteLine("Is this the correct selection\n [Y]es \n [N]o\n");
+             Char selection = GetUserInput();
+             // if the user confirms that the student record is the correct one then they can 
+             // also confirm the deletion of the student record for safety measures 
+             if (selection == 'y' && process == true)
+             {
+                 Console.WriteLine($"\n{stu} \n *** Are you sure you want to DELETE this student record?*** \n[Y]es\n[No]");
+                 char confirmation = GetUserInput();
+             // user confirms deletion
+             if (confirmation == 'y')
+             {
+                 students.Remove(stu);
+                 process = false;
+
+                 Console.WriteLine("Student Record has been deleted.\n Here is the new list:\n");
+                 PrintAllRecords();
+                 Console.WriteLine("**** Returning to the main menu ****");
+
+             }
+             // user denies deletion and program goes back to the main menu 
+             if (confirmation == 'n')
+             {
+                 Console.WriteLine("\nCancelling selection...");
+                 Console.WriteLine("**** Returning to the main menu ****");
+                 process = false;
+
+             }
+         } // if the user selected the wrong student record 
+         if (selection == 'n')
+         {
+             Console.WriteLine("\nPlease try again");
+             DeleteStudentRecord();
+         }
+     }
+      
+
+     }
+          
 
         // ADD, this method checks whether email is available, and if yes, adds to database
         private void AddNewStudentRecord()
