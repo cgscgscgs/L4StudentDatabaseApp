@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +22,8 @@ namespace StudentDbApp
 
         public override string ToString()
         {
-            return base.ToString() + $"Credit: {TuitionCredit}\n" +
-                                    $"Advisor: {FacultyAdvisor}";
+            return base.ToString() + $" Credit: {TuitionCredit}\n" +
+                                    $"Advisor: {FacultyAdvisor}\n";
         }
 
         public override string ToStringForOutputFile()
@@ -38,3 +38,4 @@ namespace StudentDbApp
         }
     }
 }
+
