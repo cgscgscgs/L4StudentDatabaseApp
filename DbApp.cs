@@ -21,7 +21,8 @@ using System.Runtime.CompilerServices;
 ///  2.23.2024   atmcdon         Added ModifyStudent() to the list as well a method.
 ///  2.24.2024   atmcdon         Added findStudentRecord1() This looks for the email in a student object list using contains method. 
 ///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
-///  2.24.23     Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu.
+///  2.24.2024   Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu. 
+///  2.24.2024   Ramirez a       fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
 ///                              
 namespace StudentDbApp
 {
@@ -284,13 +285,13 @@ namespace StudentDbApp
              {
              // confirm that the chosen student record is correct 
                  Console.WriteLine("Is this the correct selection\n [Y]es \n [N]o\n");
-                 Char selection = GetUserInput();
+                 Char selection = GetUserInputChar();
              // if the user confirms that the student record is the correct one then they can 
              // also confirm the deletion of the student record for safety measures
                  if (selection == 'y' && process == true)
                  {
                      Console.WriteLine($"\n{stu} \n *** Are you sure you want to DELETE this student record?*** \n[Y]es\n[No]");
-                     char confirmation = GetUserInput();
+                     char confirmation = GetUserInputChar();
                  // user confirms deletion
                      if (confirmation == 'y')
                      {
