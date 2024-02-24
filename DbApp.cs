@@ -16,6 +16,7 @@ using System.Runtime.CompilerServices;
 ///  2.20.2024   Schlecht c      changed output file to input file in private const string output file,
 ///                              added spaces in between ToStringForOutputFile for undergrad and graduate print outs
 ///                              added backdoor
+///  2.24.23     Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu.
 ///                              
 namespace StudentDbApp
 {
