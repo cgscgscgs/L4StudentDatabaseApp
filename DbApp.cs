@@ -130,7 +130,7 @@ namespace StudentDbApp
                         break;
                     case 'M':
                     case 'm':
-                        //ModifyStudentRecord();
+                        ModifyStudent();
                         break;
                     case 'F':
                     case 'f':
@@ -497,7 +497,7 @@ you like to modify?
                         string EMRevertBack = gradStu.EmailAddress;
                         double GPARevertBack = gradStu.GradePtAvg;
                         decimal TCRevertBack = gradStu.TuitionCredit;
-                        string AVRevertBack = gradStu.FaculityAdvisor;
+                        string AVRevertBack = gradStu.FacultyAdvisor;
                         Console.WriteLine($@"
 What part of the student account would
 you like to modify?
@@ -506,7 +506,7 @@ you like to modify?
 [E]mail address   {gradStu.EmailAddress} 
 [G]pa             {gradStu.GradePtAvg}
 [T]uition Credit  {gradStu.TuitionCredit}
-[A]dvisor         {gradStu.FaculityAdvisor}  
+[A]dvisor         {gradStu.FacultyAdvisor}  
         ");
                         char selectMod = GetUserInputChar();
 
@@ -540,7 +540,7 @@ you like to modify?
                             case 'T':
                             case 't':
                                 Console.WriteLine("Please enter new Facilty Advisor: ");
-                                gradStu.FaculityAdvisor = Console.ReadLine();
+                                gradStu.FacultyAdvisor = Console.ReadLine();
                                 break;
                             case 'A':
                             case 'a':
@@ -590,7 +590,7 @@ you like to modify?
                                     break;
                                 case 'A':
                                 case 'a':
-                                    gradStu.FaculityAdvisor = AVRevertBack;
+                                    gradStu.FacultyAdvisor = AVRevertBack;
 
                                     break;
                             }
