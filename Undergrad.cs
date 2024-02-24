@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +37,7 @@ namespace StudentDbApp
         //this method returns 
         public override string ToString()
         {
-            return base.ToString() + $" Year: {Rank}\nMajor: {DegreeMajor}\n";
+            return base.ToString() + $"   Year: {Rank}\n  Major: {DegreeMajor}\n";
         }
 
         public override string ToStringForOutputFile()
