@@ -1,4 +1,4 @@
-﻿/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////
 ///date             developer           changes
 ///1.25.2024        Schlecht, C         Initial creation of this Student.cs file, Program.cs file, 
 ///                                     and fully specified constructors for student objects
@@ -53,10 +53,10 @@ namespace StudentDbApp
             //build up that string with the info from this object
 
             str += ("********* Student Record **********\n");
-            str += $"First: {FirstName}\n";
-            str += $" Last: {LastName}\n";
-            str += $"Email: {EmailAddress}\n";
-            str += $"  GPA: {GradePtAvg:F2}\n";
+            str += $"  First: {FirstName}\n";
+            str += $"   Last: {LastName}\n";
+            str += $"  Email: {EmailAddress}\n";
+            str += $"    GPA: {GradePtAvg:F2}\n";
 
             //return the string from this method
             return str;
@@ -81,5 +81,3 @@ namespace StudentDbApp
         }
     }
 }
-
-
