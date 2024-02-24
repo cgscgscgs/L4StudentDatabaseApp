@@ -608,7 +608,22 @@ you like to modify?
             }
         }//end MODIFY method
 
+        //this anotherway to find a student by email it uses the contain method. 
+             //MODIFY method uses this.
+        private Student FindStudentRecord1()
+        {
 
+            Console.WriteLine("\nEnter the beginning of Email address ( NET ID ) to search for: ");
+            string email = Console.ReadLine();
+
+            /*Console.WriteLine(students.Exists(y => y.EmailAddress == email));*/
+
+            Console.WriteLine(students.Find(x => x.EmailAddress.Contains(email)));
+
+            Student stu = students.Find(x => x.EmailAddress.Contains(email));
+            return stu;
+
+        }
              
         //this method checks if student record exists already, using email key
         private Student FindStudentRecord(out string email)
