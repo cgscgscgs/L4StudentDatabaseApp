@@ -9,13 +9,16 @@ using System.Runtime.CompilerServices;
 /// date         developer       changes
 /// 1.25.2024    Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating objects
 ///                              class Student
-///  2.1.2024    Schlecht c     
-///  2.5.2024    Schlecht c      added more keys
+///  2.1.2024    Schlecht c      created methods
+///  2.5.2024    Schlecht c      added more cases for CRUD
 ///  2.8.2024    Schlecht c      added reading from input file
 ///  2.8.2024    Schlecht c      tuesday
 ///  2.20.2024   Schlecht c      changed output file to input file in private const string output file,
 ///                              added spaces in between ToStringForOutputFile for undergrad and graduate print outs
 ///                              added backdoor
+///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document, created a simple DeleteStudentRecord() for proof of concept
+///  2.23.2024   Schlecht C      commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
+///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
 ///  2.24.23     Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu.
 ///                              
 namespace StudentDbApp
