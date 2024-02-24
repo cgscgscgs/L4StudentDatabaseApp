@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 using System;
 using System.Collections.Generic;
@@ -105,7 +105,7 @@ namespace StudentDbApp
         
         
         
-        //
+        //displays database options to user
         private void RunDatabase()
         {
             while (true)
@@ -123,6 +123,14 @@ namespace StudentDbApp
                     case 'a':
                         AddNewStudentRecord();
                         break;
+                    case 'D':
+                    case 'd':
+                        DeleteStudentRecord();
+                        break;
+                    case 'M':
+                    case 'm':
+                        //ModifyStudentRecord();
+                        break;
                     case 'F':
                     case 'f':
                         FindStudentRecord(out string email);
@@ -131,10 +139,6 @@ namespace StudentDbApp
                     case 'k':
                         PrintAllRecordPrimaryKeys();
                         break;
-                        case 'M':
-                        case 'm':
-                            ModifyStudent();
-                            break;
                     case 'P':
                     case 'p':
                         PrintAllRecords();
@@ -189,64 +193,8 @@ namespace StudentDbApp
             }//while
         }//supersecretbackdoor
 
-        
-        // DeleteStudentRecord selects and confirms the removal of one student record 
-         private void DeleteStudentRecord()
-         {
-             Boolean process = true;
-             String email = string.Empty;
-             Student stu = FindStudentRecord(out email);
-             // if no student is found, then the method does not run through the additional if else statements 
-             // and returns to the main menu 
-             if (stu == null)
-             {
-                 process = false;
-                 Console.WriteLine("No existing record to delete. Returning to main menu");
-             }
-             // if a student record is found, then the rest of the code in the method executes 
-            else
-            {
-             // confirm that the chosen student record is correct 
-             Console.WriteLine("Is this the correct selection\n [Y]es \n [N]o\n");
-             Char selection = GetUserInput();
-             // if the user confirms that the student record is the correct one then they can 
-             // also confirm the deletion of the student record for safety measures 
-             if (selection == 'y' && process == true)
-             {
-                 Console.WriteLine($"\n{stu} \n *** Are you sure you want to DELETE this student record?*** \n[Y]es\n[No]");
-                 char confirmation = GetUserInput();
-             // user confirms deletion
-             if (confirmation == 'y')
-             {
-                 students.Remove(stu);
-                 process = false;
 
-                 Console.WriteLine("Student Record has been deleted.\n Here is the new list:\n");
-                 PrintAllRecords();
-                 Console.WriteLine("**** Returning to the main menu ****");
-
-             }
-             // user denies deletion and program goes back to the main menu 
-             if (confirmation == 'n')
-             {
-                 Console.WriteLine("\nCancelling selection...");
-                 Console.WriteLine("**** Returning to the main menu ****");
-                 process = false;
-
-             }
-         } // if the user selected the wrong student record 
-         if (selection == 'n')
-         {
-             Console.WriteLine("\nPlease try again");
-             DeleteStudentRecord();
-         }
-     }
-      
-
-     }
-          
-
-        // ADD, this method checks whether email is available, and if yes, adds to database
+        //this method checks whether email is available, and if yes, adds to database
         private void AddNewStudentRecord()
         {
             //
@@ -265,14 +213,14 @@ namespace StudentDbApp
                 Console.Write("ENTER GPA: ");
                 double gpa = double.Parse(Console.ReadLine());
 
-                Console.Write("[U]ndergrad or [G]rad Student");
+                Console.Write("[U]ndergrad or [G]rad Student: ");
                 string studentType = Console.ReadLine();
 
                 if (studentType == "U")
                 {
 
                     //accept input from user regarding year in school in int form
-                    Console.WriteLine("[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior");
+                    Console.WriteLine("[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior ");
                     Console.WriteLine("ENTER the year in school for this student: ");
                     YearRank year = (YearRank)int.Parse(Console.ReadLine());
                     Console.WriteLine("ENTER the degree major: ");
@@ -312,88 +260,60 @@ namespace StudentDbApp
 
         }
 
-        // DELETE, this method checks if a student exists, and deletes it if it does
-        private void DeleteStudentRecord() 
-        {
-            Console.WriteLine("Please enter the KEY (full university email address) of the student you wish to DELETE: ");
-            //read string from user
-            Console.Readline
-            //search for key
-            //if found, delete
-            
-            //if not found, try again? exit?
-        }
-        // FIND, this method checks if student record exists already, using email key
-        private Student FindStudentRecord(out string email)
-        {
-            Console.WriteLine("\nEnter the email address(primary key) to search for: ");
-            email = Console.ReadLine();
-
-            //iterate through students, looks for email
-            foreach (Student stu in students)
-            {
-                if (email == stu.EmailAddress)
-                {
-                    Console.WriteLine($"\nFOUND email address: {stu.EmailAddress}\n");
-                    return stu;
-                }
-            }
-
-            //when at this point, did not find email, print this
-            Console.WriteLine($"{email} NOT FOUND.");
-            return null;
-        }
-
-        // KEYS, this method prints all email addresses to console
-        private void PrintAllRecordPrimaryKeys()
-        {
-            Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
-            //for each loop to iterate through student objects and print their data
-            foreach (Student stu in students)
-            {
-                Console.WriteLine(stu.EmailAddress);
-            }
-            Console.WriteLine("++++++++++Done Listing All Student Emails++++++++++++");
-        }
-        
-        // PRINT RECORDS, this method prints all stored information about students to console window
-        private void PrintAllRecords()
-        {
-
-            Console.WriteLine("\n\n++++++++++Listing All Student Records++++++++++++");
-            //for each loop to iterate through student objects and print their data
-            foreach (Student stu in students)
-            {
-                Console.WriteLine(stu);
-            }
-            Console.WriteLine("\n++++++++++Done Listing All Student Records++++++++++++");
-        }
+                // DeleteStudentRecord selects and confirms the removal of one student record 
+         private void DeleteStudentRecord()
+         {
+             Boolean process = true;
+             String email = string.Empty;
+             Student stu = FindStudentRecord(out email);
+             // if no student is found, then the method does not run through the additional if else statements 
+             // and returns to the main menu 
+             if (stu == null)
+             {
+                 process = false;
+                 Console.WriteLine("No existing record to delete. Returning to main menu");
+             }
+             // if a student record is found, then the rest of the code in the method executes 
+             else
+             {
+             // confirm that the chosen student record is correct 
+                 Console.WriteLine("Is this the correct selection\n [Y]es \n [N]o\n");
+                 Char selection = GetUserInput();
+             // if the user confirms that the student record is the correct one then they can 
+             // also confirm the deletion of the student record for safety measures
+                 if (selection == 'y' && process == true)
+                 {
+                     Console.WriteLine($"\n{stu} \n *** Are you sure you want to DELETE this student record?*** \n[Y]es\n[No]");
+                     char confirmation = GetUserInput();
+                 // user confirms deletion
+                     if (confirmation == 'y')
+                     {
+                         students.Remove(stu);
+                         process = false;
+    
+                         Console.WriteLine("Student Record has been deleted.\n Here is the new list:\n");
+                         PrintAllRecords();
+                         Console.WriteLine("**** Returning to the main menu ****");
+    
+                     }
+                     // user denies deletion and program goes back to the main menu 
+                     if (confirmation == 'n')
+                     {
+                         Console.WriteLine("\nCancelling selection...");
+                         Console.WriteLine("**** Returning to the main menu ****");
+                         process = false;
+                     }
+         } // if the user selected the wrong student record 
+         if (selection == 'n')
+         {
+             Console.WriteLine("\nPlease try again");
+             DeleteStudentRecord();
+         }
+     } //end DELETE method
 
 
-        //get input as char from key press without having user press enter
-        private char GetUserInputChar()
-        {
-            ConsoleKeyInfo key = Console.ReadKey();
-            return key.KeyChar;
-        }
-        
-        //used by modify class to find record using contain method
-        //Will look for full email or part of email like NET IT atmcon - atmcdon@uw.edu
-        private Student FindStudentRecord1()
-        {
-
-            Console.WriteLine("\nEnter the beginning of Email address ( NET ID ) to search for: ");
-            string email = Console.ReadLine();
-
-            /*Console.WriteLine(students.Exists(y => y.EmailAddress == email));*/
-            
-            Console.WriteLine(students.Find(x => x.EmailAddress.Contains(email)));
-
-            Student stu = students.Find(x => x.EmailAddress.Contains(email));
-            return stu;
-
-        }
-        // Modify a student through a series of prompts 
+             
+     // MODIFY a student through a series of prompts 
         private void ModifyStudent()
         {
             bool exit = false;
@@ -408,11 +328,11 @@ namespace StudentDbApp
                     stu = FindStudentRecord1();
                     if (stu == null)
                     {
-                        Console.WriteLine("Student is Not found\n");
+                        Console.WriteLine("Student is NOT found.\n");
                     }
                     else if (stu !=  null)
                     {
-                        Console.WriteLine("Is this the student your looking for? ");
+                        Console.WriteLine("Is this the student you're looking for? ");
                         Console.WriteLine(@"
 [Y]es
 [N]o 
@@ -682,13 +602,94 @@ you like to modify?
                 //exits modify
                 exit = true;
             }
+        }//end MODIFY method
+
+
+             
+        //this method checks if student record exists already, using email key
+        private Student FindStudentRecord(out string email)
+        {
+            Console.WriteLine("\nEnter the primary key (email address) to search for: ");
+            email = Console.ReadLine();
+
+            //iterate through students, looks for email
+            foreach (Student stu in students)
+            {
+                if (email == stu.EmailAddress)
+                {
+                    Console.WriteLine($"\nFOUND record for: {stu.EmailAddress}\n");
+                    return stu;
+                }
+            }
+
+            //when at this point, did not find email, print this
+            Console.WriteLine($"{email} NOT FOUND.");
+            return null;
         }
 
-
-
-        private void DisplayMainMenu()
+        /*private void DeleteStudentRecord()
         {
-            Console.Write(@"
+            string email = string.Empty;
+            Student stu = FindStudentRecord(out email);
+
+            //if key is valid, will ask for confirmation and delete or not
+            if (stu != null)
+            {
+                //key is found, ask for confirmation
+                Console.WriteLine($"\nAre you sure you want to DELETE this record?:\n [Y]es [N]o");
+                if (GetUserInputChar() == 'y')
+                {
+                    students.Remove(stu);
+                    Console.WriteLine($"\nRecord deleted. Returning to Main Menu.");
+                }
+                else
+                {
+                    Console.WriteLine("\nDeletion cancelled. Returning to Main Menu.");
+                }
+
+            }
+            else { 
+            //if here, student record was not found
+            Console.WriteLine("\nStudent record not found. Returning to Main Menu.");
+            }
+        } //end of DELETE RECORD method
+        */
+
+        private void PrintAllRecordPrimaryKeys()
+            {
+                Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
+                //for each loop to iterate through student objects and print their data
+                foreach (Student stu in students)
+                {
+                    Console.WriteLine(stu.EmailAddress);
+                }
+                Console.WriteLine("++++++++++Done Listing All Student Emails++++++++++++");
+            }
+
+            private void PrintAllRecords()
+            {
+
+                Console.WriteLine("\n\n++++++++++Listing All Student Records++++++++++++");
+                //for each loop to iterate through student objects and print their data
+                foreach (Student stu in students)
+                {
+                    Console.WriteLine(stu);
+                }
+                Console.WriteLine("\n++++++++++Done Listing All Student Records++++++++++++");
+            }
+
+
+            //get input as char from key press without having user press enter
+            private char GetUserInputChar()
+            {
+                ConsoleKeyInfo key = Console.ReadKey();
+                return key.KeyChar;
+            }
+
+
+            private void DisplayMainMenu()
+            {
+                Console.Write(@"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -698,18 +699,18 @@ you like to modify?
 [M]odify student record
 [D]elete student record
 [P]rint all records 
-Print [K]eys only (email address)
-[S]ave data to file
-[E]xit without saving changes
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
 
 Choose selection: ");
-        }
+            }
 
-        //constants for reading and writing data to and from same file
+        //constants for reading and writing student data to files
         private const string StudentOutputFile = "STUDENT_INPUT_FILE.txt";
         private const string StudentInputFile = "STUDENT_INPUT_FILE.txt";
 
-        // SAVE, this method writes all data to the output file
+
         public void WriteDataToOutputFile() 
         {
         
