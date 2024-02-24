@@ -18,6 +18,8 @@ using System.Runtime.CompilerServices;
 ///                              added backdoor
 ///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document, created a simple DeleteStudentRecord() for proof of concept
 ///  2.23.2024   Schlecht C      commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
+///  2.23.2024   atmcdon         Added ModifyStudent() to the list as well a method.
+///  2.24.2024   atmcdon         Added findStudentRecord1() This looks for the email in a student object list using contains method. 
 ///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
 ///  2.24.23     Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu.
 ///                              
