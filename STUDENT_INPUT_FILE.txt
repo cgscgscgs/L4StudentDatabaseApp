@@ -21,7 +21,7 @@ Sophomore
 Psychology
 GradStudent
 David
-Donald
+Davis
 ddavis@uw.edu
 1.50
 2654.5
@@ -31,5 +31,12 @@ Celina
 Schlecht
 cgscgs@uw.edu
 3.90
+Junior
+BSIT
+Undergrad
+Andrew
+McDonald
+atmcdon@uw.edu
+1.80
 Junior
 BSIT

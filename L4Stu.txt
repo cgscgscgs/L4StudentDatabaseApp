@@ -1,12 +1,12 @@
 ﻿**********************
 Windows PowerShell transcript start
-Start time: 20240224220829
+Start time: 20240224223754
 Username: ANDREWDESKTOP\atmcdon
 RunAs User: ANDREWDESKTOP\atmcdon
 Configuration Name: 
 Machine: ANDREWDESKTOP (Microsoft Windows NT 10.0.22621.0)
 Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -Command & { Import-Module 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\Microsoft.VisualStudio.DevShell.dll'; Enter-VsDevShell -SetDefaultWindowTitle -InstallPath 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise' -StartInPath 'C:\dev\T200\L4StudentDatabaseApp' }
-Process ID: 115852
+Process ID: 117052
 PSVersion: 5.1.22621.2506
 PSEdition: Desktop
 PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.2506
@@ -18,24 +18,847 @@ SerializationVersion: 1.1.0.1
 **********************
 Transcript started, output file is L4Stu.txt
 PS C:\dev\T200\L4StudentDatabaseApp> .\bin\Release\StudentDbApp.exe
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
 
-PS C:\dev\T200\L4StudentDatabaseApp> Stop-Transcript L4Stu.txt
->> TerminatingError(Stop-Transcript): "A positional parameter cannot be found that accepts argument 'L4Stu.txt'."
-Stop-Transcript : A positional parameter cannot be found that accepts argument 'L4Stu.txt'.
-At line:1 char:1
-+ Stop-Transcript L4Stu.txt
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidArgument: (:) [Stop-Transcript], ParameterBindingException
-    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.StopTranscriptCommand
-Stop-Transcript : A positional parameter cannot be found that accepts argument 'L4Stu.txt'.
-At line:1 char:1
-+ Stop-Transcript L4Stu.txt
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidArgument: (:) [Stop-Transcript], ParameterBindingException
-    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.StopTranscriptCommand
+Choose selection: sSaving student data to output file...
+********* Student Record **********
+  First: Alice
+   Last: Anderson
+  Email: aanderson@uw.edu
+    GPA: 4.00
+   Year: Junior
+  Major: BSIT
 
+********* Student Record **********
+  First: Bob
+   Last: Bradshaw
+  Email: bbradshaw@uw.edu
+    GPA: 3.50
+ Credit: 11111.11
+Advisor: Dr. Donald Chinn
+
+********* Student Record **********
+  First: Carlos
+   Last: Castenada
+  Email: ccastenada@uw.edu
+    GPA: 2.50
+   Year: Sophomore
+  Major: Psychology
+
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+********* Student Record **********
+  First: Celina
+   Last: Schlecht
+  Email: cgscgs@uw.edu
+    GPA: 3.90
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+Done writing data to output file. File has been closed.
+PS C:\dev\T200\L4StudentDatabaseApp> .\bin\Release\StudentDbApp.exe
+Choose selection: e
 PS C:\dev\T200\L4StudentDatabaseApp> Stop-Transcript
 **********************
 Windows PowerShell transcript end
-End time: 20240224220907
+End time: 20240224224358
 **********************
+
+
+
+
+
+**********************************************************************
+** Visual Studio 2022 Developer PowerShell v17.8.3
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+PS C:\dev\T200\L4StudentDatabaseApp> Start-Transcript L4Stu.txt
+Transcript started, output file is L4Stu.txt
+PS C:\dev\T200\L4StudentDatabaseApp> .\bin\Release\StudentDbApp.exe
+Adding new student: ********* Student Record **********
+  First: Alice
+   Last: Anderson
+  Email: aanderson@uw.edu
+    GPA: 4.00
+   Year: Junior
+  Major: BSIT
+
+Adding new student: ********* Student Record **********
+  First: Bob
+   Last: Bradshaw
+  Email: bbradshaw@uw.edu
+    GPA: 3.50
+ Credit: 11111.11
+Advisor: Dr. Donald Chinn
+
+Adding new student: ********* Student Record **********
+  First: Carlos
+   Last: Castenada
+  Email: ccastenada@uw.edu
+    GPA: 2.50
+   Year: Sophomore
+  Major: Psychology
+
+Adding new student: ********* Student Record **********
+  First: David
+   Last: Donald
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+Adding new student: ********* Student Record **********
+  First: Celina
+   Last: Schlecht
+  Email: cgscgs@uw.edu
+    GPA: 3.90
+   Year: Junior
+  Major: BSIT
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: a
+Enter the primary key (email address) to search for:
+cgscgs@uw.edu
+
+FOUND record for: cgscgs@uw.edu
+
+cgscgs@uw.edu RECORD FOUND! Can't add student cgscgs@uw.edu
+ +RECORD already exists.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: a
+Enter the primary key (email address) to search for:
+atmcdon@uw.edu
+atmcdon@uw.edu NOT FOUND.
+ENTER first name: Andrew
+ENTER last name: McDonald
+ENTER GPA: 1.5
+[U]ndergrad or [G]rad Student: u
+[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior :
+ENTER the year in school for this student: 3
+ENTER the degree major: BSIT
+Adding new student to the database: ********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.50
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.50
+   Year: Junior
+  Major: BSIT
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: f
+Enter the primary key (email address) to search for:
+atmcdon@uw.edu
+
+FOUND record for: atmcdon@uw.edu
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: f
+Enter the primary key (email address) to search for:
+ttttt
+ttttt NOT FOUND.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: m
+Enter the beginning of Email address ( NET ID ) to search for:
+atmcdon
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.50
+   Year: Junior
+  Major: BSIT
+
+
+Is this the student you're looking for?
+
+[Y]es
+[N]o
+[E]xit
+
+Please enter from the selection: n
+Enter the beginning of Email address ( NET ID ) to search for:
+atmcdon
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.50
+   Year: Junior
+  Major: BSIT
+
+
+Is this the student you're looking for?
+
+[Y]es
+[N]o
+[E]xit
+
+Please enter from the selection: y
+
+Do you want to continue modifying this student?
+[Y]es or [N]o: y
+
+What part of the student account would
+you like to modify?
+[F]irst Name      Andrew
+[L]ast Name       McDonald
+[E]mail address   atmcdon@uw.edu
+[G]pa             1.5
+[Y]ear in school  Junior
+[M]ajor           BSIT
+[D]one
+
+Please Make a selection: g
+Please enter new GPA: 1.8
++++++++++++++++++++++++++++++++++++++++++++++
+
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+Are you sure you want to make this change?
+
+Confirm [Y]es or [N]o: y
+Your change has been made.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: m
+Enter the beginning of Email address ( NET ID ) to search for:
+ddavis
+********* Student Record **********
+  First: David
+   Last: Donald
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+
+Is this the student you're looking for?
+
+[Y]es
+[N]o
+[E]xit
+
+Please enter from the selection: y
+
+Do you want to continue modifying this student?
+[Y]es or [N]o: y
+
+What part of the student account would
+you like to modify?
+[F]irst Name      David
+[L]ast Name       Donald
+[E]mail address   ddavis@uw.edu
+[G]pa             1.5
+[T]uition Credit  2654.5
+[A]dvisor         Dr. Ankur Teredesai
+[D]one
+
+Please enter from the selection: l
+Please enter new Last name: Davis
++++++++++++++++++++++++++++++++++++++++++++++
+/n********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+Are you sure you want to make this change?
+
+Confirm [Y]es or [N]o: y
+Your change has been made.
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: m
+Enter the beginning of Email address ( NET ID ) to search for:
+ddavis
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+
+Is this the student you're looking for?
+
+[Y]es
+[N]o
+[E]xit
+
+Please enter from the selection: y
+
+Do you want to continue modifying this student?
+[Y]es or [N]o: y
+
+What part of the student account would
+you like to modify?
+[F]irst Name      David
+[L]ast Name       Davis
+[E]mail address   ddavis@uw.edu
+[G]pa             1.5
+[T]uition Credit  2654.5
+[A]dvisor         Dr. Ankur Teredesai
+[D]one
+
+Please enter from the selection: t
+Please enter new Tuition Credit12000
++++++++++++++++++++++++++++++++++++++++++++++
+/n********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 12000
+Advisor: Dr. Ankur Teredesai
+
+Are you sure you want to make this change?
+
+Confirm [Y]es or [N]o: n
+No change has been made.
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: a
+Enter the primary key (email address) to search for:
+test
+test NOT FOUND.
+ENTER first name: test
+ENTER last name: tester
+ENTER GPA: 3.4
+[U]ndergrad or [G]rad Student: g
+ENTER tuition credit amount (no commas): $
+15000
+ENTER the advisor: Dr.Test
+Adding new student to the database: ********* Student Record **********
+  First: test
+   Last: tester
+  Email: test
+    GPA: 3.40
+ Credit: 15000
+Advisor: Dr.Test
+
+********* Student Record **********
+  First: test
+   Last: tester
+  Email: test
+    GPA: 3.40
+ Credit: 15000
+Advisor: Dr.Test
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: d
+Enter the beginning of Email address ( NET ID ) to search for:
+test
+********* Student Record **********
+  First: test
+   Last: tester
+  Email: test
+    GPA: 3.40
+ Credit: 15000
+Advisor: Dr.Test
+
+
+Is this the correct selection
+ Confirm [Y]es [N]o [E]xit : t
+Is this the correct selection
+ Confirm [Y]es [N]o [E]xit : y
+********* Student Record **********
+  First: test
+   Last: tester
+  Email: test
+    GPA: 3.40
+ Credit: 15000
+Advisor: Dr.Test
+
+++++++++++ CONFIRM to DELETE this student record ++++++++++
+[Y]es [N]o [E]xit : y
+
+Student Record has been deleted.
+
+++++++++++     UPDATING RECORDS      ++++++++++
+
+
+++++++++++Listing All Student Records++++++++++++
+********* Student Record **********
+  First: Alice
+   Last: Anderson
+  Email: aanderson@uw.edu
+    GPA: 4.00
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Bob
+   Last: Bradshaw
+  Email: bbradshaw@uw.edu
+    GPA: 3.50
+ Credit: 11111.11
+Advisor: Dr. Donald Chinn
+
+********* Student Record **********
+  First: Carlos
+   Last: Castenada
+  Email: ccastenada@uw.edu
+    GPA: 2.50
+   Year: Sophomore
+  Major: Psychology
+
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+********* Student Record **********
+  First: Celina
+   Last: Schlecht
+  Email: cgscgs@uw.edu
+    GPA: 3.90
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+
+++++++++++Done Listing All Student Records++++++++++++
+++++++++++  Returning to the main menu    ++++++++++++
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: m
+Enter the beginning of Email address ( NET ID ) to search for:
+atmcdon
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+
+Is this the student you're looking for?
+
+[Y]es
+[N]o
+[E]xit
+
+Please enter from the selection: y
+
+Do you want to continue modifying this student?
+[Y]es or [N]o: u
+Please enter from the selection: i
+Please enter from the selection: o
+Please enter from the selection: p
+Please enter from the selection: q
+Please enter from the selection: w
+Please enter from the selection: e
+Please enter from the selection: q
+Please enter from the selection: e
+Please enter from the selection: w
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: p
+
+++++++++++Listing All Student Records++++++++++++
+********* Student Record **********
+  First: Alice
+   Last: Anderson
+  Email: aanderson@uw.edu
+    GPA: 4.00
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Bob
+   Last: Bradshaw
+  Email: bbradshaw@uw.edu
+    GPA: 3.50
+ Credit: 11111.11
+Advisor: Dr. Donald Chinn
+
+********* Student Record **********
+  First: Carlos
+   Last: Castenada
+  Email: ccastenada@uw.edu
+    GPA: 2.50
+   Year: Sophomore
+  Major: Psychology
+
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+********* Student Record **********
+  First: Celina
+   Last: Schlecht
+  Email: cgscgs@uw.edu
+    GPA: 3.90
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+
+++++++++++Done Listing All Student Records++++++++++++
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: k
+
+++++++++++Listing All Student Emails++++++++++++
+aanderson@uw.edu
+bbradshaw@uw.edu
+ccastenada@uw.edu
+ddavis@uw.edu
+cgscgs@uw.edu
+atmcdon@uw.edu
+++++++++++Done Listing All Student Emails++++++++++++
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: sSaving student data to output file...
+********* Student Record **********
+  First: Alice
+   Last: Anderson
+  Email: aanderson@uw.edu
+    GPA: 4.00
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Bob
+   Last: Bradshaw
+  Email: bbradshaw@uw.edu
+    GPA: 3.50
+ Credit: 11111.11
+Advisor: Dr. Donald Chinn
+
+********* Student Record **********
+  First: Carlos
+   Last: Castenada
+  Email: ccastenada@uw.edu
+    GPA: 2.50
+   Year: Sophomore
+  Major: Psychology
+
+********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+********* Student Record **********
+  First: Celina
+   Last: Schlecht
+  Email: cgscgs@uw.edu
+    GPA: 3.90
+   Year: Junior
+  Major: BSIT
+
+********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+Done writing data to output file. File has been closed.
+PS C:\dev\T200\L4StudentDatabaseApp> .\bin\Release\StudentDbApp.exe
+Adding new student: ********* Student Record **********
+  First: Alice
+   Last: Anderson
+  Email: aanderson@uw.edu
+    GPA: 4.00
+   Year: Junior
+  Major: BSIT
+
+Adding new student: ********* Student Record **********
+  First: Bob
+   Last: Bradshaw
+  Email: bbradshaw@uw.edu
+    GPA: 3.50
+ Credit: 11111.11
+Advisor: Dr. Donald Chinn
+
+Adding new student: ********* Student Record **********
+  First: Carlos
+   Last: Castenada
+  Email: ccastenada@uw.edu
+    GPA: 2.50
+   Year: Sophomore
+  Major: Psychology
+
+Adding new student: ********* Student Record **********
+  First: David
+   Last: Davis
+  Email: ddavis@uw.edu
+    GPA: 1.50
+ Credit: 2654.5
+Advisor: Dr. Ankur Teredesai
+
+Adding new student: ********* Student Record **********
+  First: Celina
+   Last: Schlecht
+  Email: cgscgs@uw.edu
+    GPA: 3.90
+   Year: Junior
+  Major: BSIT
+
+Adding new student: ********* Student Record **********
+  First: Andrew
+   Last: McDonald
+  Email: atmcdon@uw.edu
+    GPA: 1.80
+   Year: Junior
+  Major: BSIT
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+[A]dd student record
+[F]ind student record
+[M]odify student record
+[D]elete student record
+[P]rint all records
+Print [K]eys (email addresses) only
+[S]ave data to file and exit
+[E]xit without saving
+
+Choose selection: e
+PS C:\dev\T200\L4StudentDatabaseApp> Stop-Transcript
+Transcript stopped, output file is C:\dev\T200\L4StudentDatabaseApp\L4Stu.txt
+PS C:\dev\T200\L4StudentDatabaseApp>
+

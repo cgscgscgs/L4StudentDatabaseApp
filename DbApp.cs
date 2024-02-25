@@ -229,7 +229,7 @@ namespace StudentDbApp
                 {
 
                     //accept input from user regarding year in school in int form
-                    Console.Write("[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior : ");
+                    Console.WriteLine("[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior : ");
                     Console.Write("ENTER the year in school for this student: ");
                     YearRank year = (YearRank)int.Parse(Console.ReadLine());
                     Console.Write("ENTER the degree major: ");
