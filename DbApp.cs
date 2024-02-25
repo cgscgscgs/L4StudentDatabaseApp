@@ -222,10 +222,10 @@ namespace StudentDbApp
                 {
 
                     //accept input from user regarding year in school in int form
-                    Console.WriteLine("[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior ");
-                    Console.WriteLine("ENTER the year in school for this student: ");
+                    Console.WriteLine("[1] Freshman, [2] Sophomore, [3] Junior, [4] Senior : ");
+                    Console.Write("ENTER the year in school for this student: ");
                     YearRank year = (YearRank)int.Parse(Console.ReadLine());
-                    Console.WriteLine("ENTER the degree major: ");
+                    Console.Write("ENTER the degree major: ");
                     string major = Console.ReadLine();
 
                     //gather info for new student
@@ -234,14 +234,14 @@ namespace StudentDbApp
                     //add students to list<>
                     students.Add(newStudent);
 
-                    Console.WriteLine($"Adding new student to the database: {newStudent}");
+                    Console.WriteLine($"Adding new student to the database");
                     Console.WriteLine($"{newStudent}");
                 }
                 else if (studentType == "G" || studentType == "g")
                 {
-                    Console.WriteLine("ENTER tuition credit amount (no commas): $");
+                    Console.Write("ENTER tuition credit amount (no commas): $");
                     decimal credit = decimal.Parse(Console.ReadLine());
-                    Console.WriteLine("ENTER the advisor: ");
+                    Console.Write("ENTER the advisor: ");
                     string advisor = Console.ReadLine();
 
                     //gather info for new student
@@ -258,165 +258,12 @@ namespace StudentDbApp
             else //email found, not avail for adding to a new student
             {
 
-                Console.WriteLine($"{stu.EmailAddress} RECORD FOUND! Can't add student {email}\n +" +
+                Console.WriteLine($"{stu.EmailAddress} RECORD FOUND! \nCan't add student {email}\n\n" +
                 $"RECORD already exists.");
             }
             
 
         }
-
-
-        // DeleteStudentRecord selects and confirms the removal of one student record 
-        private void DeleteStudentRecord()
-        {
-            Boolean process = true;
-            Boolean exit = false;
-
-            Student stu = FindStudentRecord1();
-
-            // if no student is found, then the method does not run through the additional if else statements 
-            // and returns to the main menu 
-            if (stu == null)
-            {
-                process = false;
-                Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
-            }
-            // if a student record is found, then the rest of the code in the rest of the method executes 
-
-            else
-            {
-                while (exit == false)
-                {
-                    Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
-                    Char selection = GetUserInputChar();
-                    if (selection == 'y' || selection == 'Y')
-                    {
-                        //process = true;
-                        while (process)
-                        {
-                            Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
-                                            "\n[Y]es [N]o [E]xit : ");
-                            char confirmation = GetUserInputChar();
-                            // user confirms deletion
-                            if (confirmation == 'y' || confirmation == 'Y')
-                            {
-                                students.Remove(stu);
-                                process = false;
-                                exit = true;
-
-                                Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
-                                PrintAllRecords();
-                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-
-                            }
-                            if (confirmation == 'n' || confirmation == 'N')
-                            {
-                                Console.WriteLine("\nCancelling selection...");
-
-                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                                process = false;
-                                exit = true;
-                                break;
-                            }
-                            if (confirmation == 'e' || confirmation == 'E')
-                            {
-                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                                process = false;
-                                exit = true;
-                            }
-                           /* else
-                            {
-                                Console.Write(" - Please choose the correct input choice");
-                            } */
-                        }
-                        if (selection == 'n' || selection == 'N')
-                        {
-                            Console.WriteLine("\nPlease try again ");
-                            exit = true;
-                        }
-                        if (selection == 'e' || selection == 'E')
-                        {
-                            Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
-                            exit = true;
-                        }
-
-                    }
-                }
-            }
-        }
-        
-                
-               /* // process is started 
-                while (process)
-                {
-                    // if the user confirms that the student record is the correct one then they can 
-                    // also confirm the deletion of the student record for safety measures
-                    if (selection == 'y' )
-                    {
-                        Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
-                                        "\n[Y]es [N]o [E]xit : ");
-                        char confirmation = GetUserInputChar();
-                        // user confirms deletion
-                        if (confirmation == 'y' || confirmation == 'Y')
-                        {
-                            students.Remove(stu);
-                            process = false;
-
-                            Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
-                            PrintAllRecords();
-                            Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-
-                        }
-
-                        // user does not confirm the selection 
-                        if (confirmation == 'n' || confirmation == 'N')
-                        {
-                            Console.WriteLine("\nCancelling selection...");
-                            Console.Write("choose another ")
-                            /*Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                            process = false;
-                            break;*/
-                  /*      }
-
-                        // if the user see's the selection and chooses to exit before confirming
-                        if (confirmation == 'e' || confirmation == 'E')
-                        {
-                            process = false;
-                            Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid input. Please choose one of the menu options (2)");
-
-                        }
-                        // if the student chosen was the incorrect record 
-                        if(selection == 'n' || selection == 'N')
-                        {
-                            Console.WriteLine("\nTry again and type the correct student ID\n");
-                        }
-                }
-           /* }
-                // if the student record came up incorrectly 
-                if (selection == 'n' || selection == 'N')
-                {
-                    Console.WriteLine("\nTry again and type the correct student ID\n");
-                    //DeleteStudentRecord();
-                }
-                // if the user chooses to exit the crud option for delete student 
-                if (selection == 'e' || selection == 'E')
-                {
-                    process = false;
-                    Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
-
-                }
-                else
-                {
-                    Console.WriteLine("\nInvalid input - Please choose one of the menu options (1)");
-                }
-            }*/
-               
-        
 
  // DeleteStudentRecord asks for a student ID, brings up the seletion, and confirms the removal of one student record 
  private void DeleteStudentRecord()
@@ -504,6 +351,7 @@ namespace StudentDbApp
          }
      }
  }// end of removal method 
+
 
         //Input PARAMS are list of chars and compares them to a keySelection.
         //Will loop and ask the user till they get the correct one that is in charList
@@ -837,7 +685,7 @@ Please enter from the selection: ");
                                 break;
                             case 'T':
                             case 't':
-                                Console.Write("Please enter new Tuition Credit");
+                                Console.Write("Please enter new Tuition Credit(no commas): $");
                                 gradStu.TuitionCredit = decimal.Parse(Console.ReadLine());
                                 break;
                                 
@@ -933,7 +781,7 @@ Please enter from the selection: ");
         // This method checks and displays confirmation status of if a student record exists already, using email address as a key
         private Student FindStudentRecord(out string email)
         {
-            Console.WriteLine("\nEnter the primary key (email address) to search for: ");
+            Console.Write("\nEnter the primary key (email address) to search for: ");
             email = Console.ReadLine();
 
             //iterate through students, looks for email
