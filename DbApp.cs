@@ -225,7 +225,7 @@ namespace StudentDbApp
                 Console.Write("[U]ndergrad or [G]rad Student: ");
                 string studentType = Console.ReadLine();
 
-                if (studentType == "U")
+                if (studentType == "U" || studentType == "u")
                 {
 
                     //accept input from user regarding year in school in int form
@@ -242,8 +242,9 @@ namespace StudentDbApp
                     students.Add(newStudent);
 
                     Console.WriteLine($"Adding new student to the database: {newStudent}");
+                    Console.WriteLine($"{newStudent}");
                 }
-                else if (studentType == "G")
+                else if (studentType == "G" || studentType == "g")
                 {
                     Console.WriteLine("ENTER tuition credit amount (no commas): $");
                     decimal credit = decimal.Parse(Console.ReadLine());
@@ -257,15 +258,17 @@ namespace StudentDbApp
                     students.Add(newStudent);
 
                     Console.WriteLine($"Adding new student to the database: {newStudent}");
-                }
-
-                else //email found, not avail for adding to a new student
-                {
-
-                    Console.WriteLine($"{stu.EmailAddress} RECORD FOUND! Can't add student {email}\n +" +
-                    $"RECORD already exists.");
+                    Console.WriteLine($"{newStudent}");
                 }
             }
+
+            else //email found, not avail for adding to a new student
+            {
+
+                Console.WriteLine($"{stu.EmailAddress} RECORD FOUND! Can't add student {email}\n +" +
+                $"RECORD already exists.");
+            }
+            
 
         }
 
