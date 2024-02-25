@@ -271,85 +271,92 @@ namespace StudentDbApp
             
 
         }
-
-         // DeleteStudentRecord selects and confirms the removal of one student record 
-         private void DeleteStudentRecord()
-         {
-             Boolean process = true;
- Boolean exit = false;
-
- Student stu = FindStudentRecord1();
-
- // if no student is found, then the method does not run through the additional if else statements 
- // and returns to the main menu 
- if (stu == null)
+ // DeleteStudentRecord asks for a student ID, brings up the seletion, and confirms the removal of one student record 
+ private void DeleteStudentRecord()
  {
-     process = false;
-     Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
- }
- // if a student record is found, then the rest of the code in the rest of the method executes 
+     Boolean process = true;
+     Boolean exit = false;
+     // find the student using an ID search
+     Student stu = FindStudentRecord1();
 
- else
- {
-     while (exit == false)
+     // if no student is found, then the method does not run through the additional if else statements 
+     // and returns to the main menu 
+     if (stu == null)
      {
-         Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
-         Char selection = GetUserInputChar();
-         if (selection == 'y' || selection == 'Y')
-         {
-             //process = true;
-             while (process)
-             {
-                 Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
-                                 "\n[Y]es [N]o [E]xit : ");
-                 char confirmation = GetUserInputChar();
-                 // user confirms deletion
-                 if (confirmation == 'y' || confirmation == 'Y')
-                 {
-                     students.Remove(stu);
-                     process = false;
-                     exit = true;
+         process = false;
+         Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
+     }
+     // if a student record is found, then the rest of the code in the rest of the method executes 
+     else
+     {
+         while (exit == false)
+         {   // ask the user if the returned student record is correct 
+             Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
+             Char selection = GetUserInputChar();
 
-                     Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
-                     PrintAllRecords();
-                     Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+             // if the student record returned is correct 
+             if (selection == 'y' || selection == 'Y')
+             {
+                 //process = true;
+                 while (process)
+                 {   // ask to confirm the removal of the student record
+                     Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
+                                     "\n[Y]es [N]o [E]xit : ");
+                     char confirmation = GetUserInputChar();
+                     // user confirms deletion
+                     if (confirmation == 'y' || confirmation == 'Y')
+                     {
+                         students.Remove(stu);
+                         process = false;
+                         exit = true;
+
+                         Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
+                         PrintAllRecords();
+                         Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                         break;
+
+                     }
+                     // deny confirmation of removal 
+                     if (confirmation == 'n' || confirmation == 'N')
+                     {
+                         Console.WriteLine("\nCancelling selection...");
+
+                         Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                         process = false;
+                         exit = true;
+                         break;
+                     }
+                     // exit the removal method 
+                     if (confirmation == 'e' || confirmation == 'E')
+                     {
+                         Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                         process = false;
+                         exit = true;
+                         break;
+                     }
+                     else
+                     {
+                         Console.Write(" - Please choose the correct input choice");
+                     }
 
                  }
-                 if (confirmation == 'n' || confirmation == 'N')
+                 // if the returned student record is not the correct student record
+                 if (selection == 'n' || selection == 'N')
                  {
-                     Console.WriteLine("\nCancelling selection...");
+                     Console.WriteLine("\nPlease try again ");
+                     exit = true;
+                 }
+                 // exit the removal method
+                 if (selection == 'e' || selection == 'E')
+                 {
+                     Console.WriteLine("\n++++++++++  Returning to the main menu(1)    ++++++++++++");
+                     exit = true;
+                 }
 
-                     Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                     process = false;
-                     exit = true;
-                     break;
-                 }
-                 if (confirmation == 'e' || confirmation == 'E')
-                 {
-                     Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                     process = false;
-                     exit = true;
-                 }
-                /* else // this should only pop up if an incorrect key is pressed when confirming the deletion but it still 
-                // pops up after confirming and returning to the menu :(
-                 {
-                     Console.Write(" - Please choose the correct input choice");
-                 } */
              }
-             if (selection == 'n' || selection == 'N')
-             {
-                 Console.WriteLine("\nPlease try again ");
-                 exit = true;
-             }
-             if (selection == 'e' || selection == 'E')
-             {
-                 Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
-                 exit = true;
-             }
-           }
          }
-        }     
-    } //end DELETE method
+     }
+ }// end of removal method 
 
         //Input PARAMS are list of chars and compares them to a keySelection.
         //Will loop and ask the user till they get the correct one that is in charList
