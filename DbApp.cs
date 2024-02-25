@@ -1,63 +1,53 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
-
-/// date         developer       changes
-/// 1.25.2024    Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating objects
-///                              class Student
-///  2.1.2024    Schlecht c      created methods
-///  2.5.2024    Schlecht c      added more cases for CRUD
-///  2.8.2024    Schlecht c      added reading from input file
-///  2.8.2024    Schlecht c      tuesday
-///  2.20.2024   Schlecht c      changed output file to input file in private const string output file,
-///                              added spaces in between ToStringForOutputFile for undergrad and graduate print outs
-///                              added backdoor
-///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document, created a simple DeleteStudentRecord() for proof of concept
+///  date         developer       changes
+///  1.25.2024   Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating Student objects
+///  2.1.2024    Schlecht c      created methods for finding students, adding students
+///  2.5.2024    Schlecht c      added more cases for CRUD menu
+///  2.5.2024    Schlecht C      fixed spacing for dispaly of menu operations, improved readability of printouts
+///  2.8.2024    Schlecht c      added reading from input file 
+///  2.13.2024   Schlecht C      added inheritance, grad student, undergrad classes
+///  2.20.2024   Schlecht c      changed output file to input file in private const string output file, to allow users to input and output
+///  2.20.2024   Schlecht c       from same file
+///  2.20.2024   Schlecht c      added spaces in between ToStringForOutputFile for undergrad and graduate print outs
+///  2.20.2024   Schlecht c      added backdoor method for "secret" operations
+///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document
+///  2.23.2024   Schleht C       created a simple DeleteStudentRecord() for proof of concept
 ///  2.23.2024   Schlecht C      commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
 ///  2.23.2024   atmcdon         Added ModifyStudent() to the list as well a method.
-///  2.24.2024   atmcdon         Added findStudentRecord1() This looks for the email in a student object list using contains method. 
+///  2.24.2024   atmcdon         Added FindStudentRecord1() This looks for the email in a student object list using contains method. 
 ///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
 ///  2.24.2024   Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu. 
 ///  2.24.2024   Ramirez a       fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
 ///  2.24.2024   atmcdon         added the KeyListCheck() used in modify currently.
 ///  2.24.2024   atmcdon         Updated Modify to work with KeyListCheck as well, as some user interface syntax spacing.
-///                              
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+
 namespace StudentDbApp
 {
-    //this will represent the application itself
-    //known in OOP "patterns" as a "singleton" object pattern
+    //this represents the application itself
     internal class DbApp
     {
-        //typical behavior we need from a database
-        //1. store student data - we need a collection class that will store students
+        // collection class that will store students
         private List<Student> students = new List<Student>();
 
-        //we need a file to read data in from disk and write data out onto disk when we close the program
-        //adding an output file
-
-        //2. we need typical operations on a database: CRUD operations are fundamental for any db
-        //a. add record to the database [C]reate a student record if does NOT exist already in db
-        //d. find record in database. [R]ead a student record to see if it is found in db
-        //b. edit a record in the database [U]pdate student record if does exist already in db
-        //c. delete record from database [D]elete student record if it is in the db
-
-        //utility methods or operations that helps us use the database. eg - ctors, tostring methods, etc.
 
         public DbApp()
         {
             //test putting data into list and output to shell
             //DbAppTest1();
-
+            
+            // inputs data from file
             ReadStudentDataFromInputFile();
-            //run db app processing loop
            
+            // executes database for user to engage with
             RunDatabase();
 
-            //test outputting data to the output file
+            // outputs data to the output file
             WriteDataToOutputFile();
         }
 
@@ -114,18 +104,19 @@ namespace StudentDbApp
         
         
         
-        //displays database options to user
+        // This method displays database operation options to user in a list, captures their selection
+        //  and calls the corresponding operation        
         private void RunDatabase()
         {
             while (true)
             {
-                //iplay main menu
+                // display main menu
                 DisplayMainMenu();
 
                 //caputure choice
                 char selection = GetUserInputChar();
 
-                //do someting with a switch
+                // execute operation based on user input
                 switch (selection)
                 {
                     case 'A':
@@ -171,15 +162,16 @@ namespace StudentDbApp
 
             }
         }
-
+        
+         // this method allows users to access a "secret" operation menu if they know the entry key of [`]
         private void SuperSecretBackdoor()
         {
             while (true)
             {
-                //caputure choice
+                // caputure user choice
                 char selection = GetUserInputChar();
 
-                //do someting with a switch
+                // execute operation based on user input
                 switch (selection)
                 {
                     case '!':
@@ -197,13 +189,14 @@ namespace StudentDbApp
                     default:
                         Console.Write($"ERROR: {selection} is not a valid INPUT, Select again: ");
                         break;
-                }//swtich
+                }// end switch
 
-            }//while
-        }//supersecretbackdoor
+            }// end while
+        }// end supersecretbackdoor
 
 
-        //this method checks whether email is available, and if yes, adds to database
+        // This method checks whether email address (key) is available, and if yes, walks 
+        //  user through how to add to database
         private void AddNewStudentRecord()
         {
             //
@@ -272,85 +265,93 @@ namespace StudentDbApp
 
         }
 
-        // DeleteStudentRecord selects and confirms the removal of one student record 
-        private void DeleteStudentRecord()
-        {
-            Boolean process = true;
-            Boolean exit = false;
+ // DeleteStudentRecord asks for a student ID, brings up the seletion, and confirms the removal of one student record 
+ private void DeleteStudentRecord()
+ {
+     Boolean process = true;
+     Boolean exit = false;
+     // find the student using an ID search
+     Student stu = FindStudentRecord1();
 
-            Student stu = FindStudentRecord1();
+     // if no student is found, then the method does not run through the additional if else statements 
+     // and returns to the main menu 
+     if (stu == null)
+     {
+         process = false;
+         Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
+     }
+     // if a student record is found, then the rest of the code in the rest of the method executes 
+     else
+     {
+         while (exit == false)
+         {   // ask the user if the returned student record is correct 
+             Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
+             Char selection = GetUserInputChar();
 
-            // if no student is found, then the method does not run through the additional if else statements 
-            // and returns to the main menu 
-            if (stu == null)
-            {
-                process = false;
-                Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
-            }
-            // if a student record is found, then the rest of the code in the rest of the method executes 
+             // if the student record returned is correct 
+             if (selection == 'y' || selection == 'Y')
+             {
+                 //process = true;
+                 while (process)
+                 {   // ask to confirm the removal of the student record
+                     Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
+                                     "\n[Y]es [N]o [E]xit : ");
+                     char confirmation = GetUserInputChar();
+                     // user confirms deletion
+                     if (confirmation == 'y' || confirmation == 'Y')
+                     {
+                         students.Remove(stu);
+                         process = false;
+                         exit = true;
 
-            else
-            {
-                while (exit == false)
-                {
-                    Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
-                    Char selection = GetUserInputChar();
-                    if (selection == 'y' || selection == 'Y')
-                    {
-                        //process = true;
-                        while (process)
-                        {
-                            Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
-                                            "\n[Y]es [N]o [E]xit : ");
-                            char confirmation = GetUserInputChar();
-                            // user confirms deletion
-                            if (confirmation == 'y' || confirmation == 'Y')
-                            {
-                                students.Remove(stu);
-                                process = false;
-                                exit = true;
+                         Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
+                         PrintAllRecords();
+                         Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                         break;
 
-                                Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
-                                PrintAllRecords();
-                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                     }
+                     // deny confirmation of removal 
+                     if (confirmation == 'n' || confirmation == 'N')
+                     {
+                         Console.WriteLine("\nCancelling selection...");
 
-                            }
-                            if (confirmation == 'n' || confirmation == 'N')
-                            {
-                                Console.WriteLine("\nCancelling selection...");
+                         Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                         process = false;
+                         exit = true;
+                         break;
+                     }
+                     // exit the removal method 
+                     if (confirmation == 'e' || confirmation == 'E')
+                     {
+                         Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                         process = false;
+                         exit = true;
+                         break;
+                     }
+                     else
+                     {
+                         Console.Write(" - Please choose the correct input choice");
+                     }
 
-                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                                process = false;
-                                exit = true;
-                                break;
-                            }
-                            if (confirmation == 'e' || confirmation == 'E')
-                            {
-                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
-                                process = false;
-                                exit = true;
-                            }
-                        /* else // this should only pop up if an incorrect key is pressed when confirming the deletion but it still 
-                        // pops up after confirming and returning to the menu :(
-                            {
-                                Console.Write(" - Please choose the correct input choice");
-                            } */
-                        }
-                    }
-                    if (selection == 'n' || selection == 'N')
-                    {
-                        Console.WriteLine("\nPlease try again ");
-                        exit = true;
-                    }
-                    if (selection == 'e' || selection == 'E')
-                    {
-                        Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
-                        exit = true;
-                    }
-                
-                }
-            }     
-        } //end DELETE method
+                 }
+                 // if the returned student record is not the correct student record
+                 if (selection == 'n' || selection == 'N')
+                 {
+                     Console.WriteLine("\nPlease try again ");
+                     exit = true;
+                 }
+                 // exit the removal method
+                 if (selection == 'e' || selection == 'E')
+                 {
+                     Console.WriteLine("\n++++++++++  Returning to the main menu(1)    ++++++++++++");
+                     exit = true;
+                 }
+
+             }
+         }
+     }
+ }// end of removal method 
+
 
         //Input PARAMS are list of chars and compares them to a keySelection.
         //Will loop and ask the user till they get the correct one that is in charList
@@ -472,6 +473,8 @@ Please enter from the selection: ");
                 { break; }
                 Console.WriteLine("\n\nDo you want to continue modifying this student?");
                 /*Console.WriteLine(stu.ToString());*/
+
+
                 //if no then it will rinse and repeat.
                 Console.Write("[Y]es or [N]o: ");
 
@@ -498,7 +501,12 @@ Please enter from the selection: ");
                         
                         Console.Write($@"
 
-What part of the student account would
+
+
+
+
+                        Console.WriteLine($@"
+What part of the student record would
 you like to modify?
 [F]irst Name      {undergrad.FirstName}
 [L]ast Name       {undergrad.LastName}
@@ -506,6 +514,11 @@ you like to modify?
 [G]pa             {undergrad.GradePtAvg}
 [Y]ear in school  {undergrad.Rank}
 [M]ajor           {undergrad.DegreeMajor}
+
+[D]one with modifications
+            ");
+                        char selectMod = GetUserInputChar();
+
 [D]one
 
 Please Make a selection: ");
@@ -514,37 +527,49 @@ Please Make a selection: ");
                         KeyListCheck(out char selectMod, underGradMenu);
                         Console.WriteLine("");
 
+
                         switch (selectMod)
                         {
                             case 'F':
                             case 'f':
+
+                                Console.Write("\nPlease enter new first name: ");
+
                                 Console.Write("Please enter new first name: ");
+
                                 undergrad.FirstName = Console.ReadLine();
                                 break;
                             case 'L':
                             case 'l':
+                                Console.Write("\nPlease enter new Last name: ");
+
                                 Console.Write("Please enter new Last name: ");
                                 undergrad.LastName = Console.ReadLine();
                                 break;
                             case 'E':
                             case 'e':
-                                Console.Write("Please enter new Email: ");
+
+                                Console.Write("\nPlease enter new Email: ");
                                 undergrad.EmailAddress = Console.ReadLine();
                                 break;
                             case 'G':
                             case 'g':
-                                Console.Write("Please enter new GPA: ");
+
+                                Console.Write("\nPlease enter new GPA: ");
+
                                 undergrad.GradePtAvg = double.Parse(Console.ReadLine());
                                 break;
                             case 'Y':
                             case 'y':
-                                Console.Write("[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
+
+                                Console.Write("\n[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
                                 Console.Write("Enter the year in school for this student:");
                                 undergrad.Rank = (YearRank)int.Parse(Console.ReadLine());
                                 break;
                             case 'M':
                             case 'm':
-                                Console.Write("Please enter new Major: ");
+
+                                Console.Write("\nPlease enter new Major: ");
                                 undergrad.DegreeMajor = Console.ReadLine();
                                 break;
                             case 'D':
@@ -553,13 +578,13 @@ Please Make a selection: ");
                                 break;
 
                         }
-                        if (exit)
-                        { break; }
-                        Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
+
+                        Console.WriteLine("++++++++++Modifying Student Record+++++++++++");
 
                         Console.WriteLine($"\n{undergrad}");
                         Console.WriteLine("Are you sure you want to make this change?");
-                        Console.Write("\nConfirm [Y]es or [N]o: ");
+                        Console.Write("Confirm [Y]es or [N]o: ");
+
                         //are you sure you want to make this change?
                         //yes or no
                         
@@ -733,8 +758,11 @@ Please enter from the selection: ");
         }//end MODIFY method
 
 
-        //this anotherway to find a student by email it uses the contain method. 
+
+
+        //this is another way to find a student by email using the Contains() method. 
              //MODIFY method uses this.
+
         private Student FindStudentRecord1()
         {
 
@@ -750,7 +778,7 @@ Please enter from the selection: ");
 
         }
              
-        //this method checks if student record exists already, using email key
+        // This method checks and displays confirmation status of if a student record exists already, using email address as a key
         private Student FindStudentRecord(out string email)
         {
             Console.Write("\nEnter the primary key (email address) to search for: ");
@@ -798,7 +826,7 @@ Please enter from the selection: ");
             }
         } //end of DELETE RECORD method
         */
-
+        
         private void PrintAllRecordPrimaryKeys()
             {
                 Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
@@ -810,10 +838,12 @@ Please enter from the selection: ");
                 Console.WriteLine("++++++++++Done Listing All Student Emails++++++++++++");
             }
 
+        
+             // This method prints all student records in a labeled and formatted list, with line seperations between students
             private void PrintAllRecords()
             {
 
-                Console.WriteLine("\n\n++++++++++Listing All Student Records++++++++++++");
+                Console.WriteLine("\n++++++++++Listing All Student Records++++++++++++");
                 //for each loop to iterate through student objects and print their data
                 foreach (Student stu in students)
                 {
@@ -823,14 +853,14 @@ Please enter from the selection: ");
             }
 
 
-            //get input as char from key press without having user press enter
+            // This method allows us to get input as char from key press without having user press enter
             private char GetUserInputChar()
             {
                 ConsoleKeyInfo key = Console.ReadKey();
                 return key.KeyChar;
             }
 
-
+            // This method displays standard database operation options to user
             private void DisplayMainMenu()
             {
                 Console.Write(@"
@@ -854,14 +884,15 @@ Choose selection: ");
         private const string StudentOutputFile = "STUDENT_INPUT_FILE.txt";
         private const string StudentInputFile = "STUDENT_INPUT_FILE.txt";
 
-
+        // this method prints all student data to the specified output file, each token on its own line
         public void WriteDataToOutputFile() 
         {
-        
+            //direct output of the data to the file
             StreamWriter outFile = new StreamWriter(StudentOutputFile);
 
-            //use the file to redirect output of the data to the file
+            // notify user that writing is taking place
             Console.WriteLine("Saving student data to output file...");
+            
             //iterate through student objects and print their data
             foreach (Student stu in students)
             {

@@ -2,9 +2,8 @@
 /// date         developer       changes
 /// 1.25.2024    Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating objects
 ///                              class Student
-///  2.1.2024    Schlecht, C     sdfsd
-///  2.6.2024   Schlecht, C     added K, other methods
-///  2.13.2024 schlecht, c      added inheritance, grad student, undergrad
+///  2.1.2024    Schlecht, C     Added methods for testing
+///  2.6.2024   Schlecht, C      commented out MainTest1() as it was not necessary for advancing the app
 
 using System;
 using System.Collections.Generic;
