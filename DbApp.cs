@@ -241,12 +241,12 @@ namespace StudentDbApp
                     //add students to list<>
                     students.Add(newStudent);
 
-                    Console.WriteLine($"Adding new student to the database: {newStudent}");
+                    Console.WriteLine($"Adding new student to the database");
                     Console.WriteLine($"{newStudent}");
                 }
                 else if (studentType == "G" || studentType == "g")
                 {
-                    Console.WriteLine("ENTER tuition credit amount (no commas): $");
+                    Console.Write("ENTER tuition credit amount (no commas): $");
                     decimal credit = decimal.Parse(Console.ReadLine());
                     Console.Write("ENTER the advisor: ");
                     string advisor = Console.ReadLine();
@@ -265,7 +265,7 @@ namespace StudentDbApp
             else //email found, not avail for adding to a new student
             {
 
-                Console.WriteLine($"{stu.EmailAddress} RECORD FOUND! Can't add student {email}\n +" +
+                Console.WriteLine($"{stu.EmailAddress} RECORD FOUND! \nCan't add student {email}\n\n" +
                 $"RECORD already exists.");
             }
             
@@ -660,7 +660,7 @@ Please enter from the selection: ");
                                 break;
                             case 'T':
                             case 't':
-                                Console.Write("Please enter new Tuition Credit");
+                                Console.Write("Please enter new Tuition Credit(no commas): $");
                                 gradStu.TuitionCredit = decimal.Parse(Console.ReadLine());
                                 break;
                                 
@@ -738,7 +738,7 @@ Please enter from the selection: ");
         private Student FindStudentRecord1()
         {
 
-            Console.WriteLine("\nEnter the beginning of Email address ( NET ID ) to search for: ");
+            Console.Write("\nEnter the beginning of Email address ( NET ID ) to search for: ");
             string email = Console.ReadLine();
 
             /*Console.WriteLine(students.Exists(y => y.EmailAddress == email));*/
@@ -753,7 +753,7 @@ Please enter from the selection: ");
         //this method checks if student record exists already, using email key
         private Student FindStudentRecord(out string email)
         {
-            Console.WriteLine("\nEnter the primary key (email address) to search for: ");
+            Console.Write("\nEnter the primary key (email address) to search for: ");
             email = Console.ReadLine();
 
             //iterate through students, looks for email

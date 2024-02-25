@@ -154,8 +154,10 @@ cgscgs@uw.edu
 
 FOUND record for: cgscgs@uw.edu
 
-cgscgs@uw.edu RECORD FOUND! Can't add student cgscgs@uw.edu
- +RECORD already exists.
+cgscgs@uw.edu RECORD FOUND! 
+Can't add student cgscgs@uw.edu
+
+RECORD already exists.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%% Student Database App %%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,14 +183,7 @@ ENTER GPA: 1.5
 [1] Freshman, [2] Sophomore, [3] Junior, [4] Senior :
 ENTER the year in school for this student: 3
 ENTER the degree major: BSIT
-Adding new student to the database: ********* Student Record **********
-  First: Andrew
-   Last: McDonald
-  Email: atmcdon@uw.edu
-    GPA: 1.50
-   Year: Junior
-  Major: BSIT
-
+Adding new student to the database
 ********* Student Record **********
   First: Andrew
    Last: McDonald
@@ -212,8 +207,7 @@ Print [K]eys (email addresses) only
 [E]xit without saving
 
 Choose selection: f
-Enter the primary key (email address) to search for:
-atmcdon@uw.edu
+Enter the primary key (email address) to search for: atmcdon@uw.edu
 
 FOUND record for: atmcdon@uw.edu
 
