@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////
+// date       developer       change history
+// 2.09.2024  cgscgs          initial creation of this file and writing of all methods
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
