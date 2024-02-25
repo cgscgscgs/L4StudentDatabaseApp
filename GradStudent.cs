@@ -1,6 +1,8 @@
 ////////////////////////////////////////////////////////
 // date       developer       change history
-// 2.09.2024  cgscgs          initial creation of this file and writing of all methods
+// 2.13.2024  cgscgs          initial creation of this file and writing of all methods
+// 2.13.2024  cgscgs          added inheritance, grad student, undergrad
+
 
 using System;
 using System.Collections.Generic;
