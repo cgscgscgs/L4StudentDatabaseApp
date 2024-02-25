@@ -1,22 +1,15 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
-
 ///  date         developer       changes
 ///  1.25.2024   Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating Student objects
 ///  2.1.2024    Schlecht c      created methods for finding students, adding students
 ///  2.5.2024    Schlecht c      added more cases for CRUD menu
 ///  2.5.2024    Schlecht C      fixed spacing for dispaly of menu operations, improved readability of printouts
 ///  2.8.2024    Schlecht c      added reading from input file 
-///  2.9.2024    Schlecht c      implemented polymorphism with graduate student and undergraduate, both "is a" student
+///  2.13.2024   Schlecht C      added inheritance, grad student, undergrad classes
 ///  2.20.2024   Schlecht c      changed output file to input file in private const string output file, to allow users to input and output
-///                              from same file
-///                              added spaces in between ToStringForOutputFile for undergrad and graduate print outs
-///                              added backdoor method for "secret" operations
+///  2.20.2024   Schlecht c       from same file
+///  2.20.2024   Schlecht c      added spaces in between ToStringForOutputFile for undergrad and graduate print outs
+///  2.20.2024   Schlecht c      added backdoor method for "secret" operations
 ///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document
 ///  2.23.2024   Schleht C       created a simple DeleteStudentRecord() for proof of concept
 ///  2.23.2024   Schlecht C      commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
@@ -27,7 +20,13 @@ using System.Runtime.CompilerServices;
 ///  2.24.2024   Ramirez a       fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
 ///  2.24.2024   atmcdon         added the KeyListCheck() used in modify currently.
 ///  2.24.2024   atmcdon         Updated Modify to work with KeyListCheck as well, as some user interface syntax spacing.
-///                              
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;           
+
 namespace StudentDbApp
 {
     //this represents the application itself
