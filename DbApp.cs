@@ -13,7 +13,6 @@ using System.Runtime.CompilerServices;
 ///  2.5.2024    Schlecht C      fixed spacing for dispaly of menu operations, improved readability of printouts
 ///  2.8.2024    Schlecht c      added reading from input file 
 ///  2.9.2024    Schlecht c      implemented polymorphism with graduate student and undergraduate, both "is a" student
-///  2.11.2024   Schlecht C      
 ///  2.20.2024   Schlecht c      changed output file to input file in private const string output file, to allow users to input and output
 ///                              from same file
 ///                              added spaces in between ToStringForOutputFile for undergrad and graduate print outs
