@@ -2,7 +2,7 @@
 /// date         developer       changes
 /// 1.25.2024    Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating objects
 ///                              class Student
-///  2.1.2024    Schlecht, C     Added methods
+///  2.1.2024    Schlecht, C     Added methods for testing
 ///  2.6.2024   Schlecht, C      commented out MainTest1() as it was not necessary for advancing the app
 
 using System;
