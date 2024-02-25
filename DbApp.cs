@@ -11,13 +11,16 @@
 ///  2.20.2024   Schlecht c      added spaces in between ToStringForOutputFile for undergrad and graduate print outs
 ///  2.20.2024   Schlecht c      added backdoor method for "secret" operations
 ///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document
-///  2.23.2024   Schleht C       created a simple DeleteStudentRecord() for proof of concept
-///  2.23.2024   Schlecht C      commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
+///  2.23.2024   Schlecht C      created a simple DeleteStudentRecord() for proof of concept
+///  2.23.2024   Schlecht C      Commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
 ///  2.23.2024   atmcdon         Added ModifyStudent() to the list as well a method.
 ///  2.24.2024   atmcdon         Added FindStudentRecord1() This looks for the email in a student object list using contains method. 
-///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
-///  2.24.2024   Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu. 
-///  2.24.2024   Ramirez a       fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
+///  2.24.2024   Schlecht C      Fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
+///  2.24.2024   karistep        Formatted FindStudentRecord1() for better input and output readability 
+///  2.24.2024   aloram12        created the deleteStudentRecord() method, with boolean and char variables to supplement the CRUD menu. 
+///  2.24.2024   aloram12        Fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
+///  2.24.2024   aloram12        implemented Andrews FindStudentRecord1() method for consistency throughout the entire app 
+///  2.24.2024   karistep        Formatted deleteStudentRecord() method for cleaner input and output experience
 ///  2.24.2024   atmcdon         added the KeyListCheck() used in modify currently.
 ///  2.24.2024   atmcdon         Updated Modify to work with KeyListCheck as well, as some user interface syntax spacing.
 
