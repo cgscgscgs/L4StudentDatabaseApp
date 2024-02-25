@@ -826,7 +826,8 @@ Please enter from the selection: ");
             }
         } //end of DELETE RECORD method
         */
-        
+
+        // This method prints all email addresses for students that exist in the database, to the console.
         private void PrintAllRecordPrimaryKeys()
             {
                 Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
