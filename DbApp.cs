@@ -23,6 +23,8 @@ using System.Runtime.CompilerServices;
 ///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
 ///  2.24.2024   Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu. 
 ///  2.24.2024   Ramirez a       fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
+///  2.24.2024   atmcdon         added the KeyListCheck() used in modify currently.
+///  2.24.2024   atmcdon         Updated Modify to work with KeyListCheck as well, as some user interface syntax spacing.
 ///                              
 namespace StudentDbApp
 {
@@ -346,35 +348,111 @@ namespace StudentDbApp
         }     
     } //end DELETE method
 
+        //Input PARAMS are list of chars and compares them to a keySelection.
+        //Will loop and ask the user till they get the correct one that is in charList
+        //After 10 trys will return false
+        //The return false can be used to say exit menu. 
+        //Will out the Key selecion that matches the CharList.
+        //EXAMPLE of use:
+        /*char[] tryList = { 't', 'T', 'e', 'E' };
+        if (KeyListCheck(out char selectKey, tryList) == false)
+        {
+            //if bad trys are greater then 10.
+            exit = true;
+            break;
+        }
+        if (selectKey == 'T' || selectKey == 't')
+        */
+        private bool KeyListCheck(out char keySelection, char[] charList)
+        {
+            keySelection = GetUserInputChar();
 
-             
-     // MODIFY a student through a series of prompts 
+            int countBadTrys = 0;
+            while (true)
+            {
+                
+                //if selectedKey is in CharList[,] then reply true.
+                for (int i = 0; i < charList.Length; i++)
+                {
+                    if (keySelection == charList[i])
+                        
+                        return true;      
+                }
+                if (countBadTrys == 9)
+                {
+                    //if bad trys are greater then 10 then it wll exit modify.
+                    break;
+                }
+                Console.Write("\nPlease enter from the selection: ");
+                keySelection = GetUserInputChar();
+                countBadTrys++;
+            }
+            return false;
+        }
+
+        // MODIFY a student through a series of prompts 
+        // ModifyStudent() will first find the student object that will be stu.
+        // Depending on stu's class type either undergrad or grad student there 
+        //  are Two paths to take, either update a grad stu or undergrad stu.
+        // Both of these make a copy before there is edit.
+        // Once the edit is made, there is a confirm that the user must acknowledge.
+        // Otherwise stu will be reverted back so there is no change.
         private void ModifyStudent()
         {
+            //will keep looping till exit 
             bool exit = false;
             while (exit == false)
             {
                 Student stu = null;
                 //finds student by email or beginning of email (NETID)
-                
-                
                 while (true)
                 {
                     stu = FindStudentRecord1();
                     if (stu == null)
                     {
-                        Console.WriteLine("Student is NOT found.\n");
+                        //If not found will give option to leave or try again.
+                        Console.WriteLine("\nStudent is NOT found.");
+                        Console.Write(@"
+[T]ry another
+[E]xit
+
+Please enter from the selection: ");
+                        char[] tryList = { 't', 'T', 'e', 'E' };
+                        //takes in selected and returns true or false if keys are in list.
+                        if (KeyListCheck(out char select1, tryList) == false)
+                        {
+                            //if bad trys are greater then 10 then it wll exit modify.
+                            exit = true;
+                            break;
+                        }
+                        if (select1 == 'T' || select1 == 't')
+                        {
+                            //do nothing will go back in the loop
+                        }
+                        if (select1 == 'e' || select1 == 'E')
+                        {
+                            exit = true;
+                            break;
+                        }
+                        
                     }
-                    else if (stu !=  null)
+                    else if (stu != null)
                     {
-                        Console.WriteLine("Is this the student you're looking for? ");
-                        Console.WriteLine(@"
+                        Console.WriteLine("\nIs this the student you're looking for? ");
+                        Console.Write(@"
 [Y]es
 [N]o 
 [E]xit
 
-");
-                        char select1 = GetUserInputChar();
+Please enter from the selection: ");
+                        char[] findRecList = { 'y', 'Y', 'e', 'E', 'N','n' };
+                        //takes in selected and returns true or false if keys are in list.
+                        if (KeyListCheck(out char select1, findRecList) == false)
+                        {
+                            //if bad trys are greater then 10 then it wll exit modify.
+                            exit = true;
+                            break;
+                        }
                         if (select1 == 'y' || select1 == 'Y')
                         {
                             break;
@@ -385,19 +463,19 @@ namespace StudentDbApp
                             break;
                         }
                     }
-                    
-
                 }
                 if (exit)
                 { break; }
-                //print student
-                Console.WriteLine("\nDo you want to continue modifying this student?");
+                Console.WriteLine("\n\nDo you want to continue modifying this student?");
                 /*Console.WriteLine(stu.ToString());*/
-                Console.WriteLine("[Y]es or [N]o: ");
+                //if no then it will rinse and repeat.
+                Console.Write("[Y]es or [N]o: ");
 
-                char selection = GetUserInputChar();
+                char[] charList = { 'y', 'Y', 'n', 'N' };
+                //takes in selected and returns true or false if keys are in list.
+                KeyListCheck(out char selection, charList);
 
-                if (selection == 'y' || selection == 'Y')
+                    if (selection == 'y' || selection == 'Y')
                 {
                     //Gets type of student 
                     if (stu is Undergrad)
@@ -413,11 +491,9 @@ namespace StudentDbApp
                         double GPARevertBack = undergrad.GradePtAvg;
                         YearRank YRRevertBack = undergrad.Rank;
                         string DMRevertBack = undergrad.DegreeMajor;
+                        
+                        Console.Write($@"
 
-
-
-
-                        Console.WriteLine($@"
 What part of the student account would
 you like to modify?
 [F]irst Name      {undergrad.FirstName}
@@ -427,65 +503,74 @@ you like to modify?
 [Y]ear in school  {undergrad.Rank}
 [M]ajor           {undergrad.DegreeMajor}
 [D]one
-            ");
-                        char selectMod = GetUserInputChar();
+
+Please Make a selection: ");
+                        char [] underGradMenu = { 'f', 'F', 'l', 'L', 'e', 'E', 'g', 'G', 'Y', 'y', 'M', 'm', 'd', 'D' };
+                        //takes in selected and returns true or false if keys are in list.
+                        KeyListCheck(out char selectMod, underGradMenu);
+                        Console.WriteLine("");
 
                         switch (selectMod)
                         {
                             case 'F':
                             case 'f':
-                                Console.WriteLine("Please enter new first name: ");
+                                Console.Write("Please enter new first name: ");
                                 undergrad.FirstName = Console.ReadLine();
                                 break;
                             case 'L':
                             case 'l':
-                                Console.WriteLine("Please enter new Last name: ");
+                                Console.Write("Please enter new Last name: ");
                                 undergrad.LastName = Console.ReadLine();
                                 break;
                             case 'E':
                             case 'e':
-                                Console.WriteLine("Please enter new Email: ");
+                                Console.Write("Please enter new Email: ");
                                 undergrad.EmailAddress = Console.ReadLine();
                                 break;
                             case 'G':
                             case 'g':
-                                Console.WriteLine("Please enter new GPA: ");
+                                Console.Write("Please enter new GPA: ");
                                 undergrad.GradePtAvg = double.Parse(Console.ReadLine());
                                 break;
                             case 'Y':
                             case 'y':
-                                Console.WriteLine("[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
-                                Console.WriteLine("Enter the year in school for this student:");
+                                Console.Write("[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
+                                Console.Write("Enter the year in school for this student:");
                                 undergrad.Rank = (YearRank)int.Parse(Console.ReadLine());
                                 break;
                             case 'M':
                             case 'm':
-                                Console.WriteLine("Please enter new Major: ");
+                                Console.Write("Please enter new Major: ");
                                 undergrad.DegreeMajor = Console.ReadLine();
                                 break;
                             case 'D':
                             case 'd':
-
+                                exit = true;
                                 break;
 
                         }
+                        if (exit)
+                        { break; }
                         Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
 
-                        Console.WriteLine($"/n{undergrad}");
+                        Console.WriteLine($"\n{undergrad}");
                         Console.WriteLine("Are you sure you want to make this change?");
-                        Console.WriteLine("Confirm [Y]es or [N]o: ");
+                        Console.Write("\nConfirm [Y]es or [N]o: ");
                         //are you sure you want to make this change?
                         //yes or no
-                        char confirmChange = GetUserInputChar();
+                        
+                        //The list is charList = { 'y', 'Y', 'n', 'N' };
+                        //takes in selected and returns true or false if keys are in list.
+                        KeyListCheck(out char confirmChange, charList);
                         if (confirmChange == 'y' || confirmChange == 'Y')
                         {
-                            Console.WriteLine("Your change has been made.");
+                            Console.WriteLine("\nYour change has been made.");
                         }
 
                         //no will revert back to the original
                         if (confirmChange == 'n' || confirmChange == 'N')
                         {
-                            Console.WriteLine("No change has been made.");
+                            Console.WriteLine("\nNo change has been made.");
                             switch (selectMod)
                             {
                                 case 'F':
@@ -519,8 +604,6 @@ you like to modify?
                         }
                     }
 
-                        
-
                     if (stu is GradStudent)
                     {
                         GradStudent gradStu = (GradStudent)stu; // Cast stu to GradStudent
@@ -532,7 +615,8 @@ you like to modify?
                         double GPARevertBack = gradStu.GradePtAvg;
                         decimal TCRevertBack = gradStu.TuitionCredit;
                         string AVRevertBack = gradStu.FacultyAdvisor;
-                        Console.WriteLine($@"
+                        Console.Write($@"
+
 What part of the student account would
 you like to modify?
 [F]irst Name      {gradStu.FirstName}
@@ -540,65 +624,71 @@ you like to modify?
 [E]mail address   {gradStu.EmailAddress} 
 [G]pa             {gradStu.GradePtAvg}
 [T]uition Credit  {gradStu.TuitionCredit}
-[A]dvisor         {gradStu.FacultyAdvisor}  
-        ");
-                        char selectMod = GetUserInputChar();
+[A]dvisor         {gradStu.FacultyAdvisor} 
+[D]one
 
+Please enter from the selection: ");
+                        char[] gradMenu = { 'f', 'F', 'l', 'L', 'e', 'E', 'g', 'G', 'A', 'a', 'T', 't', 'd', 'D' };
+                        //takes in selected and returns true or false if keys are in list.
+                        KeyListCheck(out char selectMod, gradMenu);
+                        Console.WriteLine("");
                         switch (selectMod)
                         {
                             case 'F':
                             case 'f':
-                                Console.WriteLine("Please enter new first name: ");
+                                Console.Write("Please enter new first name: ");
                                 gradStu.FirstName = Console.ReadLine();
                                 break;
                             case 'L':
                             case 'l':
-                                Console.WriteLine("Please enter new Last name: ");
+                                Console.Write("Please enter new Last name: ");
                                 gradStu.LastName = Console.ReadLine();
                                 break;
                             case 'E':
                             case 'e':
-                                Console.WriteLine("Please enter new Email: ");
+                                Console.Write("Please enter new Email: ");
                                 gradStu.EmailAddress = Console.ReadLine();
                                 break;
                             case 'G':
                             case 'g':
-                                Console.WriteLine("Please enter new GPA: ");
+                                Console.Write("Please enter new GPA: ");
                                 gradStu.GradePtAvg = double.Parse(Console.ReadLine());
-                                break;
-                            case 'Y':
-                            case 'y':
-                                Console.WriteLine("Please enter new Tuition Credit");
-                                gradStu.TuitionCredit = decimal.Parse(Console.ReadLine());
                                 break;
                             case 'T':
                             case 't':
-                                Console.WriteLine("Please enter new Facilty Advisor: ");
-                                gradStu.FacultyAdvisor = Console.ReadLine();
+                                Console.Write("Please enter new Tuition Credit");
+                                gradStu.TuitionCredit = decimal.Parse(Console.ReadLine());
                                 break;
+                                
                             case 'A':
                             case 'a':
-
+                                Console.Write("Please enter new Facilty Advisor: ");
+                                gradStu.FacultyAdvisor = Console.ReadLine();
+                                break;
+                            case 'D':
+                            case 'd':
+                                exit = true;
                                 break;
 
                         }
+                        if (exit)
+                        { break; }
                         Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
 
                         Console.WriteLine($"/n{gradStu}");
                         Console.WriteLine("Are you sure you want to make this change?");
-                        Console.WriteLine("Confirm [Y]es or [N]o: ");
+                        Console.Write("\nConfirm [Y]es or [N]o: ");
                         //are you sure you want to make this change?
                         //yes or no
-                        char confirmChange = GetUserInputChar();
+                        KeyListCheck(out char confirmChange, charList);
                         if (confirmChange == 'y' || confirmChange == 'Y')
                         {
-                            Console.WriteLine("Your change has been made.");
+                            Console.WriteLine("\nYour change has been made.");
                         }
-
                         //no will revert back to the original
                         if (confirmChange == 'n' || confirmChange == 'N')
                         {
-                            Console.WriteLine("No change has been made.");
+                            Console.WriteLine("\nNo change has been made.");
                             switch (selectMod)
                             {
                                 case 'F':
@@ -632,12 +722,12 @@ you like to modify?
                         //print new version if stu with reverted or updated
                         Console.WriteLine($"{gradStu}");
                     }
-   
                 }
                 //exits modify
                 exit = true;
             }
         }//end MODIFY method
+
 
         //this anotherway to find a student by email it uses the contain method. 
              //MODIFY method uses this.
