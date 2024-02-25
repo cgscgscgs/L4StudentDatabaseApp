@@ -21,11 +21,11 @@
 ///  2.24.2024   atmcdon         added the KeyListCheck() used in modify currently.
 ///  2.24.2024   atmcdon         Updated Modify to work with KeyListCheck as well, as some user interface syntax spacing.
 
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;           
 
 namespace StudentDbApp
 {
@@ -264,6 +264,160 @@ namespace StudentDbApp
             
 
         }
+
+
+        // DeleteStudentRecord selects and confirms the removal of one student record 
+        private void DeleteStudentRecord()
+        {
+            Boolean process = true;
+            Boolean exit = false;
+
+            Student stu = FindStudentRecord1();
+
+            // if no student is found, then the method does not run through the additional if else statements 
+            // and returns to the main menu 
+            if (stu == null)
+            {
+                process = false;
+                Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
+            }
+            // if a student record is found, then the rest of the code in the rest of the method executes 
+
+            else
+            {
+                while (exit == false)
+                {
+                    Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
+                    Char selection = GetUserInputChar();
+                    if (selection == 'y' || selection == 'Y')
+                    {
+                        //process = true;
+                        while (process)
+                        {
+                            Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
+                                            "\n[Y]es [N]o [E]xit : ");
+                            char confirmation = GetUserInputChar();
+                            // user confirms deletion
+                            if (confirmation == 'y' || confirmation == 'Y')
+                            {
+                                students.Remove(stu);
+                                process = false;
+                                exit = true;
+
+                                Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
+                                PrintAllRecords();
+                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+
+                            }
+                            if (confirmation == 'n' || confirmation == 'N')
+                            {
+                                Console.WriteLine("\nCancelling selection...");
+
+                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                                process = false;
+                                exit = true;
+                                break;
+                            }
+                            if (confirmation == 'e' || confirmation == 'E')
+                            {
+                                Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                                process = false;
+                                exit = true;
+                            }
+                           /* else
+                            {
+                                Console.Write(" - Please choose the correct input choice");
+                            } */
+                        }
+                        if (selection == 'n' || selection == 'N')
+                        {
+                            Console.WriteLine("\nPlease try again ");
+                            exit = true;
+                        }
+                        if (selection == 'e' || selection == 'E')
+                        {
+                            Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                            exit = true;
+                        }
+
+                    }
+                }
+            }
+        }
+        
+                
+               /* // process is started 
+                while (process)
+                {
+                    // if the user confirms that the student record is the correct one then they can 
+                    // also confirm the deletion of the student record for safety measures
+                    if (selection == 'y' )
+                    {
+                        Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
+                                        "\n[Y]es [N]o [E]xit : ");
+                        char confirmation = GetUserInputChar();
+                        // user confirms deletion
+                        if (confirmation == 'y' || confirmation == 'Y')
+                        {
+                            students.Remove(stu);
+                            process = false;
+
+                            Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
+                            PrintAllRecords();
+                            Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+
+                        }
+
+                        // user does not confirm the selection 
+                        if (confirmation == 'n' || confirmation == 'N')
+                        {
+                            Console.WriteLine("\nCancelling selection...");
+                            Console.Write("choose another ")
+                            /*Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                            process = false;
+                            break;*/
+                  /*      }
+
+                        // if the user see's the selection and chooses to exit before confirming
+                        if (confirmation == 'e' || confirmation == 'E')
+                        {
+                            process = false;
+                            Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Please choose one of the menu options (2)");
+
+                        }
+                        // if the student chosen was the incorrect record 
+                        if(selection == 'n' || selection == 'N')
+                        {
+                            Console.WriteLine("\nTry again and type the correct student ID\n");
+                        }
+                }
+           /* }
+                // if the student record came up incorrectly 
+                if (selection == 'n' || selection == 'N')
+                {
+                    Console.WriteLine("\nTry again and type the correct student ID\n");
+                    //DeleteStudentRecord();
+                }
+                // if the user chooses to exit the crud option for delete student 
+                if (selection == 'e' || selection == 'E')
+                {
+                    process = false;
+                    Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+
+                }
+                else
+                {
+                    Console.WriteLine("\nInvalid input - Please choose one of the menu options (1)");
+                }
+            }*/
+               
+        
+
  // DeleteStudentRecord asks for a student ID, brings up the seletion, and confirms the removal of one student record 
  private void DeleteStudentRecord()
  {
@@ -471,6 +625,8 @@ Please enter from the selection: ");
                 { break; }
                 Console.WriteLine("\n\nDo you want to continue modifying this student?");
                 /*Console.WriteLine(stu.ToString());*/
+
+
                 //if no then it will rinse and repeat.
                 Console.Write("[Y]es or [N]o: ");
 
@@ -497,7 +653,12 @@ Please enter from the selection: ");
                         
                         Console.Write($@"
 
-What part of the student account would
+
+
+
+
+                        Console.WriteLine($@"
+What part of the student record would
 you like to modify?
 [F]irst Name      {undergrad.FirstName}
 [L]ast Name       {undergrad.LastName}
@@ -505,6 +666,11 @@ you like to modify?
 [G]pa             {undergrad.GradePtAvg}
 [Y]ear in school  {undergrad.Rank}
 [M]ajor           {undergrad.DegreeMajor}
+
+[D]one with modifications
+            ");
+                        char selectMod = GetUserInputChar();
+
 [D]one
 
 Please Make a selection: ");
@@ -513,37 +679,49 @@ Please Make a selection: ");
                         KeyListCheck(out char selectMod, underGradMenu);
                         Console.WriteLine("");
 
+
                         switch (selectMod)
                         {
                             case 'F':
                             case 'f':
+
+                                Console.Write("\nPlease enter new first name: ");
+
                                 Console.Write("Please enter new first name: ");
+
                                 undergrad.FirstName = Console.ReadLine();
                                 break;
                             case 'L':
                             case 'l':
+                                Console.Write("\nPlease enter new Last name: ");
+
                                 Console.Write("Please enter new Last name: ");
                                 undergrad.LastName = Console.ReadLine();
                                 break;
                             case 'E':
                             case 'e':
-                                Console.Write("Please enter new Email: ");
+
+                                Console.Write("\nPlease enter new Email: ");
                                 undergrad.EmailAddress = Console.ReadLine();
                                 break;
                             case 'G':
                             case 'g':
-                                Console.Write("Please enter new GPA: ");
+
+                                Console.Write("\nPlease enter new GPA: ");
+
                                 undergrad.GradePtAvg = double.Parse(Console.ReadLine());
                                 break;
                             case 'Y':
                             case 'y':
-                                Console.Write("[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
+
+                                Console.Write("\n[1]Freshman, [2]Sophomore, [3]Junior, [4]Senior ");
                                 Console.Write("Enter the year in school for this student:");
                                 undergrad.Rank = (YearRank)int.Parse(Console.ReadLine());
                                 break;
                             case 'M':
                             case 'm':
-                                Console.Write("Please enter new Major: ");
+
+                                Console.Write("\nPlease enter new Major: ");
                                 undergrad.DegreeMajor = Console.ReadLine();
                                 break;
                             case 'D':
@@ -552,13 +730,13 @@ Please Make a selection: ");
                                 break;
 
                         }
-                        if (exit)
-                        { break; }
-                        Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
+
+                        Console.WriteLine("++++++++++Modifying Student Record+++++++++++");
 
                         Console.WriteLine($"\n{undergrad}");
                         Console.WriteLine("Are you sure you want to make this change?");
-                        Console.Write("\nConfirm [Y]es or [N]o: ");
+                        Console.Write("Confirm [Y]es or [N]o: ");
+
                         //are you sure you want to make this change?
                         //yes or no
                         
@@ -732,12 +910,15 @@ Please enter from the selection: ");
         }//end MODIFY method
 
 
+
+
         //this is another way to find a student by email using the Contains() method. 
              //MODIFY method uses this.
+
         private Student FindStudentRecord1()
         {
 
-            Console.WriteLine("\nEnter the beginning of Email address ( NET ID ) to search for: ");
+            Console.Write("\nEnter the beginning of Email address ( NET ID ) to search for: ");
             string email = Console.ReadLine();
 
             /*Console.WriteLine(students.Exists(y => y.EmailAddress == email));*/
@@ -814,7 +995,7 @@ Please enter from the selection: ");
             private void PrintAllRecords()
             {
 
-                Console.WriteLine("\n\n++++++++++Listing All Student Records++++++++++++");
+                Console.WriteLine("\n++++++++++Listing All Student Records++++++++++++");
                 //for each loop to iterate through student objects and print their data
                 foreach (Student stu in students)
                 {
