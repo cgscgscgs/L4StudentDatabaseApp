@@ -267,56 +267,84 @@ namespace StudentDbApp
 
         }
 
-                // DeleteStudentRecord selects and confirms the removal of one student record 
+         // DeleteStudentRecord selects and confirms the removal of one student record 
          private void DeleteStudentRecord()
          {
              Boolean process = true;
-             String email = string.Empty;
-             Student stu = FindStudentRecord(out email);
-             // if no student is found, then the method does not run through the additional if else statements 
-             // and returns to the main menu 
-             if (stu == null)
-             {
-                 process = false;
-                 Console.WriteLine("No existing record to delete. Returning to main menu");
-             }
-             // if a student record is found, then the rest of the code in the method executes 
-             else
-             {
-             // confirm that the chosen student record is correct 
-                 Console.WriteLine("Is this the correct selection\n [Y]es \n [N]o\n");
-                 Char selection = GetUserInputChar();
-             // if the user confirms that the student record is the correct one then they can 
-             // also confirm the deletion of the student record for safety measures
-                 if (selection == 'y' && process == true)
-                 {
-                     Console.WriteLine($"\n{stu} \n *** Are you sure you want to DELETE this student record?*** \n[Y]es\n[No]");
-                     char confirmation = GetUserInputChar();
-                 // user confirms deletion
-                     if (confirmation == 'y')
-                     {
-                         students.Remove(stu);
-                         process = false;
-    
-                         Console.WriteLine("Student Record has been deleted.\n Here is the new list:\n");
-                         PrintAllRecords();
-                         Console.WriteLine("**** Returning to the main menu ****");
-    
-                     }
-                     // user denies deletion and program goes back to the main menu 
-                     if (confirmation == 'n')
-                     {
-                         Console.WriteLine("\nCancelling selection...");
-                         Console.WriteLine("**** Returning to the main menu ****");
-                         process = false;
-                     }
-         } // if the user selected the wrong student record 
-         if (selection == 'n')
+ Boolean exit = false;
+
+ Student stu = FindStudentRecord1();
+
+ // if no student is found, then the method does not run through the additional if else statements 
+ // and returns to the main menu 
+ if (stu == null)
+ {
+     process = false;
+     Console.WriteLine("No existing record to delete.\n++++++++++Returning to the main menu++++++++++");
+ }
+ // if a student record is found, then the rest of the code in the rest of the method executes 
+
+ else
+ {
+     while (exit == false)
+     {
+         Console.Write("\nIs this the correct selection\n Confirm [Y]es [N]o [E]xit : ");
+         Char selection = GetUserInputChar();
+         if (selection == 'y' || selection == 'Y')
          {
-             Console.WriteLine("\nPlease try again");
-             DeleteStudentRecord();
+             //process = true;
+             while (process)
+             {
+                 Console.Write($"\n{stu}\n++++++++++ CONFIRM to DELETE this student record ++++++++++" +
+                                 "\n[Y]es [N]o [E]xit : ");
+                 char confirmation = GetUserInputChar();
+                 // user confirms deletion
+                 if (confirmation == 'y' || confirmation == 'Y')
+                 {
+                     students.Remove(stu);
+                     process = false;
+                     exit = true;
+
+                     Console.WriteLine("\n\nStudent Record has been deleted.\n\n++++++++++     UPDATING RECORDS      ++++++++++");
+                     PrintAllRecords();
+                     Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+
+                 }
+                 if (confirmation == 'n' || confirmation == 'N')
+                 {
+                     Console.WriteLine("\nCancelling selection...");
+
+                     Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                     process = false;
+                     exit = true;
+                     break;
+                 }
+                 if (confirmation == 'e' || confirmation == 'E')
+                 {
+                     Console.WriteLine("++++++++++  Returning to the main menu    ++++++++++++");
+                     process = false;
+                     exit = true;
+                 }
+                /* else // this should only pop up if an incorrect key is pressed when confirming the deletion but it still 
+                // pops up after confirming and returning to the menu :(
+                 {
+                     Console.Write(" - Please choose the correct input choice");
+                 } */
+             }
+             if (selection == 'n' || selection == 'N')
+             {
+                 Console.WriteLine("\nPlease try again ");
+                 exit = true;
+             }
+             if (selection == 'e' || selection == 'E')
+             {
+                 Console.WriteLine("\n++++++++++  Returning to the main menu    ++++++++++++");
+                 exit = true;
+             }
+           }
          }
-     } //end DELETE method
+        }     
+    } //end DELETE method
 
 
              
