@@ -19,7 +19,7 @@
 ///  2.24.2024   karistep        Formatted FindStudentRecord1() for better input and output readability 
 ///  2.24.2024   aloram12        created the deleteStudentRecord() method, with boolean and char variables to supplement the CRUD menu. 
 ///  2.24.2024   aloram12        Fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
-///  2.24.2024   aloram12        implemented Andrews FindStudentRecord1() method for consistency throughout the entire app 
+///  2.24.2024   aloram12        implemented Andrews FindStudentRecord1() into deleteStudentRecord ()method for consistency throughout the entire app 
 ///  2.24.2024   karistep        Formatted deleteStudentRecord() method for cleaner input and output experience
 ///  2.24.2024   atmcdon         added the KeyListCheck() used in modify currently.
 ///  2.24.2024   atmcdon         Updated Modify to work with KeyListCheck as well, as some user interface syntax spacing.
