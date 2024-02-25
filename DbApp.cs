@@ -6,20 +6,23 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-/// date         developer       changes
-/// 1.25.2024    Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating objects
-///                              class Student
-///  2.1.2024    Schlecht c      created methods
-///  2.5.2024    Schlecht c      added more cases for CRUD
-///  2.8.2024    Schlecht c      added reading from input file
-///  2.8.2024    Schlecht c      tuesday
-///  2.20.2024   Schlecht c      changed output file to input file in private const string output file,
+///  date         developer       changes
+///  1.25.2024   Schlecht, C     Inital creation of this Program.cs file, Student.cs file, began creating Student objects
+///  2.1.2024    Schlecht c      created methods for finding students, adding students
+///  2.5.2024    Schlecht c      added more cases for CRUD menu
+///  2.5.2024    Schlecht C      fixed spacing for dispaly of menu operations, improved readability of printouts
+///  2.8.2024    Schlecht c      added reading from input file 
+///  2.9.2024    Schlecht c      implemented polymorphism with graduate student and undergraduate, both "is a" student
+///  2.11.2024   Schlecht C      
+///  2.20.2024   Schlecht c      changed output file to input file in private const string output file, to allow users to input and output
+///                              from same file
 ///                              added spaces in between ToStringForOutputFile for undergrad and graduate print outs
-///                              added backdoor
-///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document, created a simple DeleteStudentRecord() for proof of concept
+///                              added backdoor method for "secret" operations
+///  2.23.2024   Schlecht C      fixed spacing errors throughout whole document
+///  2.23.2024   Schleht C       created a simple DeleteStudentRecord() for proof of concept
 ///  2.23.2024   Schlecht C      commented out Schlecht's DeleteStudentRecord() to use Ramirez's, more in depth, more options for user
 ///  2.23.2024   atmcdon         Added ModifyStudent() to the list as well a method.
-///  2.24.2024   atmcdon         Added findStudentRecord1() This looks for the email in a student object list using contains method. 
+///  2.24.2024   atmcdon         Added FindStudentRecord1() This looks for the email in a student object list using contains method. 
 ///  2.24.2024   Schlecht C      fixed Faculity to Faculty, spelling error, spacing errors in ModifyStudent() method
 ///  2.24.2024   Ramirez a       created the deleteStudentRecord method, with boolean and char variables to supplement the CRUD menu. 
 ///  2.24.2024   Ramirez a       fixed the method calls to match collaborative file: "getUserInput > getUserInputChar"
@@ -28,36 +31,25 @@ using System.Runtime.CompilerServices;
 ///                              
 namespace StudentDbApp
 {
-    //this will represent the application itself
-    //known in OOP "patterns" as a "singleton" object pattern
+    //this represents the application itself
     internal class DbApp
     {
-        //typical behavior we need from a database
-        //1. store student data - we need a collection class that will store students
+        // collection class that will store students
         private List<Student> students = new List<Student>();
 
-        //we need a file to read data in from disk and write data out onto disk when we close the program
-        //adding an output file
-
-        //2. we need typical operations on a database: CRUD operations are fundamental for any db
-        //a. add record to the database [C]reate a student record if does NOT exist already in db
-        //d. find record in database. [R]ead a student record to see if it is found in db
-        //b. edit a record in the database [U]pdate student record if does exist already in db
-        //c. delete record from database [D]elete student record if it is in the db
-
-        //utility methods or operations that helps us use the database. eg - ctors, tostring methods, etc.
 
         public DbApp()
         {
             //test putting data into list and output to shell
             //DbAppTest1();
-
+            
+            // inputs data from file
             ReadStudentDataFromInputFile();
-            //run db app processing loop
            
+            // executes database for user to engage with
             RunDatabase();
 
-            //test outputting data to the output file
+            // outputs data to the output file
             WriteDataToOutputFile();
         }
 
@@ -114,18 +106,19 @@ namespace StudentDbApp
         
         
         
-        //displays database options to user
+        // This method displays database operation options to user in a list, captures their selection
+        //  and calls the corresponding operation        
         private void RunDatabase()
         {
             while (true)
             {
-                //iplay main menu
+                // display main menu
                 DisplayMainMenu();
 
                 //caputure choice
                 char selection = GetUserInputChar();
 
-                //do someting with a switch
+                // execute operation based on user input
                 switch (selection)
                 {
                     case 'A':
@@ -171,15 +164,16 @@ namespace StudentDbApp
 
             }
         }
-
+        
+         // this method allows users to access a "secret" operation menu if they know the entry key of [`]
         private void SuperSecretBackdoor()
         {
             while (true)
             {
-                //caputure choice
+                // caputure user choice
                 char selection = GetUserInputChar();
 
-                //do someting with a switch
+                // execute operation based on user input
                 switch (selection)
                 {
                     case '!':
@@ -197,13 +191,14 @@ namespace StudentDbApp
                     default:
                         Console.Write($"ERROR: {selection} is not a valid INPUT, Select again: ");
                         break;
-                }//swtich
+                }// end switch
 
-            }//while
-        }//supersecretbackdoor
+            }// end while
+        }// end supersecretbackdoor
 
 
-        //this method checks whether email is available, and if yes, adds to database
+        // This method checks whether email address (key) is available, and if yes, walks 
+        //  user through how to add to database
         private void AddNewStudentRecord()
         {
             //
@@ -739,7 +734,7 @@ Please enter from the selection: ");
         }//end MODIFY method
 
 
-        //this anotherway to find a student by email it uses the contain method. 
+        //this is another way to find a student by email using the Contains() method. 
              //MODIFY method uses this.
         private Student FindStudentRecord1()
         {
@@ -756,7 +751,7 @@ Please enter from the selection: ");
 
         }
              
-        //this method checks if student record exists already, using email key
+        // This method checks and displays confirmation status of if a student record exists already, using email address as a key
         private Student FindStudentRecord(out string email)
         {
             Console.WriteLine("\nEnter the primary key (email address) to search for: ");
@@ -804,7 +799,7 @@ Please enter from the selection: ");
             }
         } //end of DELETE RECORD method
         */
-
+        
         private void PrintAllRecordPrimaryKeys()
             {
                 Console.WriteLine("\n\n++++++++++Listing All Student Emails++++++++++++");
@@ -816,6 +811,8 @@ Please enter from the selection: ");
                 Console.WriteLine("++++++++++Done Listing All Student Emails++++++++++++");
             }
 
+        
+             // This method prints all student records in a labeled and formatted list, with line seperations between students
             private void PrintAllRecords()
             {
 
@@ -829,14 +826,14 @@ Please enter from the selection: ");
             }
 
 
-            //get input as char from key press without having user press enter
+            // This method allows us to get input as char from key press without having user press enter
             private char GetUserInputChar()
             {
                 ConsoleKeyInfo key = Console.ReadKey();
                 return key.KeyChar;
             }
 
-
+            // This method displays standard database operation options to user
             private void DisplayMainMenu()
             {
                 Console.Write(@"
@@ -860,14 +857,15 @@ Choose selection: ");
         private const string StudentOutputFile = "STUDENT_INPUT_FILE.txt";
         private const string StudentInputFile = "STUDENT_INPUT_FILE.txt";
 
-
+        // this method prints all student data to the specified output file, each token on its own line
         public void WriteDataToOutputFile() 
         {
-        
+            //direct output of the data to the file
             StreamWriter outFile = new StreamWriter(StudentOutputFile);
 
-            //use the file to redirect output of the data to the file
+            // notify user that writing is taking place
             Console.WriteLine("Saving student data to output file...");
+            
             //iterate through student objects and print their data
             foreach (Student stu in students)
             {
