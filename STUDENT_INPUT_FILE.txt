@@ -24,7 +24,7 @@ David
 Davis
 ddavis@uw.edu
 1.50
-2654.5
+12000
 Dr. Ankur Teredesai
 Undergrad
 Celina
@@ -37,6 +37,6 @@ Undergrad
 Andrew
 McDonald
 atmcdon@uw.edu
-1.80
+2.00
 Junior
 BSIT

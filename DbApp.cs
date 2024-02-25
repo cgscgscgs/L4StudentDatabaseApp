@@ -500,12 +500,6 @@ Please enter from the selection: ");
                         string DMRevertBack = undergrad.DegreeMajor;
                         
                         Console.Write($@"
-
-
-
-
-
-                        Console.WriteLine($@"
 What part of the student record would
 you like to modify?
 [F]irst Name      {undergrad.FirstName}
@@ -514,11 +508,6 @@ you like to modify?
 [G]pa             {undergrad.GradePtAvg}
 [Y]ear in school  {undergrad.Rank}
 [M]ajor           {undergrad.DegreeMajor}
-
-[D]one with modifications
-            ");
-                        char selectMod = GetUserInputChar();
-
 [D]one
 
 Please Make a selection: ");
