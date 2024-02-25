@@ -1,0 +1,41 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20240224220829
+Username: ANDREWDESKTOP\atmcdon
+RunAs User: ANDREWDESKTOP\atmcdon
+Configuration Name: 
+Machine: ANDREWDESKTOP (Microsoft Windows NT 10.0.22621.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -Command & { Import-Module 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\Microsoft.VisualStudio.DevShell.dll'; Enter-VsDevShell -SetDefaultWindowTitle -InstallPath 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise' -StartInPath 'C:\dev\T200\L4StudentDatabaseApp' }
+Process ID: 115852
+PSVersion: 5.1.22621.2506
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.2506
+BuildVersion: 10.0.22621.2506
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is L4Stu.txt
+PS C:\dev\T200\L4StudentDatabaseApp> .\bin\Release\StudentDbApp.exe
+
+PS C:\dev\T200\L4StudentDatabaseApp> Stop-Transcript L4Stu.txt
+>> TerminatingError(Stop-Transcript): "A positional parameter cannot be found that accepts argument 'L4Stu.txt'."
+Stop-Transcript : A positional parameter cannot be found that accepts argument 'L4Stu.txt'.
+At line:1 char:1
++ Stop-Transcript L4Stu.txt
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Stop-Transcript], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.StopTranscriptCommand
+Stop-Transcript : A positional parameter cannot be found that accepts argument 'L4Stu.txt'.
+At line:1 char:1
++ Stop-Transcript L4Stu.txt
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Stop-Transcript], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.StopTranscriptCommand
+
+PS C:\dev\T200\L4StudentDatabaseApp> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20240224220907
+**********************

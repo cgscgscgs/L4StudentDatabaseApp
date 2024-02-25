@@ -21,10 +21,10 @@ Sophomore
 Psychology
 GradStudent
 David
-Davis
+Donald
 ddavis@uw.edu
 1.50
-222222.22
+2654.5
 Dr. Ankur Teredesai
 Undergrad
 Celina
